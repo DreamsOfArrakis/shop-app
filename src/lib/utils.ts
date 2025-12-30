@@ -22,16 +22,20 @@ export const getURL = () => {
 
 export const keytoUrl = (key?: string) => {
   if (!key) {
-    // Fallback image - you can replace this with a Supabase Storage URL later
-    return "https://hiyori-backpack.s3.us-west-2.amazonaws.com/public/bathroom-planning.jpg";
+    // Fallback to placeholder image
+    return "https://placehold.co/800x800/e5e7eb/9ca3af?text=No+Image";
   }
 
   // If key already has full URL, return it
   if (key.startsWith("http")) return key;
 
+  // Don't remove 'public/' prefix - Supabase Storage needs it in the path
+  // The key is stored as "public/filename.ext" and should be used as-is
+  const cleanKey = key;
+
   // Construct Supabase Storage URL
   const projectRef = env.NEXT_PUBLIC_SUPABASE_PROJECT_REF;
-  return `https://${projectRef}.supabase.co/storage/v1/object/public/media/${key}`;
+  return `https://${projectRef}.supabase.co/storage/v1/object/public/media/${cleanKey}`;
 };
 
 export function formatPrice(price: number | string) {

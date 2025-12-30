@@ -62,29 +62,115 @@ const CollectionRouteQuery = gql(/* GraphQL */ `
 async function CategoryPage({ params, searchParams }: CategoryPageProps) {
   const { collectionSlug } = params;
 
-  const { data } = await getClient().query(CollectionRouteQuery, {
-    collectionSlug,
+  // Use direct fetch since URQL has issues with fragments
+  const { env } = await import("@/env.mjs");
+  const graphqlUrl = `https://${env.NEXT_PUBLIC_SUPABASE_PROJECT_REF}.supabase.co/graphql/v1`;
+  
+  // Include fragment definitions in the query
+  const query = `
+    fragment CollectionBannerFragment on collections {
+      id
+      label
+      slug
+      featuredImage: medias {
+        id
+        key
+        alt
+      }
+    }
+    
+    fragment ProductCardFragment on products {
+      id
+      name
+      description
+      rating
+      slug
+      badge
+      price
+      featuredImage: medias {
+        id
+        key
+        alt
+      }
+      collections {
+        id
+        label
+        slug
+      }
+    }
+    
+    query CollectionRouteQuery($collectionSlug: String) {
+      collectionsCollection(
+        filter: { slug: { eq: $collectionSlug } }
+        orderBy: [{ order: DescNullsLast }]
+        first: 1
+      ) {
+        edges {
+          node {
+            title
+            label
+            description
+            ...CollectionBannerFragment
+            productsCollection(orderBy: [{ created_at: DescNullsLast }]) {
+              pageInfo {
+                hasNextPage
+              }
+              edges {
+                node {
+                  id
+                  ...ProductCardFragment
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+  
+  const response = await fetch(graphqlUrl, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      apikey: env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+    },
+    body: JSON.stringify({
+      query,
+      variables: { collectionSlug },
+    }),
   });
-
-  if (
-    data === null ||
-    !data?.collectionsCollection?.edges[0].node ||
-    data?.collectionsCollection === null ||
-    data?.collectionsCollection?.edges[0].node.productsCollection === null
-  )
+  
+  const json = await response.json();
+  
+  if (json.errors) {
+    console.error("❌ GraphQL Errors:", json.errors);
     return notFound();
+  }
+  
+  const data = json.data;
 
-  const productsList =
-    data?.collectionsCollection?.edges[0].node.productsCollection;
-
-  if (!productsList) return notFound();
+  // Check if collection exists
+  if (
+    !data?.collectionsCollection?.edges ||
+    data.collectionsCollection.edges.length === 0 ||
+    !data.collectionsCollection.edges[0]?.node
+  ) {
+    return notFound();
+  }
 
   const collection = data.collectionsCollection.edges[0].node;
+  const productsList = collection.productsCollection;
+
+  // Allow empty products collection - just show empty state
+  // Only return 404 if productsCollection is explicitly null (error case)
+  if (productsList === null) {
+    console.error("productsCollection is null for collection:", collectionSlug);
+    return notFound();
+  }
+
   return (
     <Shell>
-      <CollectionBanner
-        collectionBannerData={data.collectionsCollection.edges[0].node}
-      />
+      <CollectionBanner collectionBannerData={collection} />
       <SectionHeading
         heading={collection.title}
         description={collection.description}
@@ -102,9 +188,7 @@ async function CategoryPage({ params, searchParams }: CategoryPageProps) {
       </Suspense>
 
       <Suspense fallback={<SearchProductsGridSkeleton />}>
-        <SearchProductsInifiteScroll
-          collectionId={data.collectionsCollection.edges[0].node.id}
-        />
+        <SearchProductsInifiteScroll collectionId={collection.id} />
       </Suspense>
     </Shell>
   );

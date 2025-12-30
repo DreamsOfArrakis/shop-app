@@ -40,8 +40,6 @@ const collections = [
 
 const seedCollections = async () => {
   try {
-    await db.delete(schema.collections);
-
     const insertedCollections = await db
       .insert(schema.collections)
       .values(collections)

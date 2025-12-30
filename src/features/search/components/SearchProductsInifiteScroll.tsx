@@ -79,7 +79,6 @@ const searchParamsVariablesFactory = (
       orderBy = undefined;
   }
 
-  console.log("collections", collections);
   const varaibles: SearchQueryVariables = {
     search: search ? `%${search.trim()}%` : "%%",
     lower: range && range[0] ? `${range[0]}` : undefined,

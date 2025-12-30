@@ -12,8 +12,9 @@ export const makeClient = (access_token?: string) => {
     url: `https://${env.NEXT_PUBLIC_SUPABASE_PROJECT_REF}.supabase.co/graphql/v1`,
     exchanges: [cacheExchange, fetchExchange],
     fetchOptions: () => {
-      const headers = {
-        apiKey: env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+      const headers: Record<string, string> = {
+        apikey: env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+        "Content-Type": "application/json",
       };
 
       if (access_token) {

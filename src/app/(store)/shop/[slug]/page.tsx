@@ -70,12 +70,132 @@ const ProductDetailPageQuery = gql(/* GraphQL */ `
 `);
 
 async function ProductDetailPage({ params }: Props) {
-  const { data, error } = await getClient().query(ProductDetailPageQuery, {
-    productSlug: params.slug as string,
+  // Use direct fetch since URQL has issues with fragments
+  const { env } = await import("@/env.mjs");
+  const graphqlUrl = `https://${env.NEXT_PUBLIC_SUPABASE_PROJECT_REF}.supabase.co/graphql/v1`;
+  
+  // Include fragment definitions in the query
+  const query = `
+    fragment ProductImageShowcaseFragment on products {
+      id
+      featuredImage: medias {
+        id
+        key
+        alt
+      }
+      images: product_mediasCollection(orderBy: [{ priority: DescNullsLast }]) {
+        edges {
+          node {
+            media {
+              id
+              key
+              alt
+            }
+          }
+        }
+      }
+    }
+    
+    fragment ProductCardFragment on products {
+      id
+      name
+      description
+      rating
+      slug
+      badge
+      price
+      featuredImage: medias {
+        id
+        key
+        alt
+      }
+      collections {
+        id
+        label
+        slug
+      }
+    }
+    
+    fragment ProductCommentsSectionFragment on comments {
+      id
+      comment
+      profile {
+        name
+      }
+    }
+    
+    query ProductDetailPageQuery($productSlug: String) {
+      productsCollection(filter: { slug: { eq: $productSlug } }) {
+        edges {
+          node {
+            id
+            name
+            description
+            rating
+            price
+            tags
+            totalComments
+            ...ProductImageShowcaseFragment
+            commentsCollection(first: 5) {
+              edges {
+                node {
+                  ...ProductCommentsSectionFragment
+                }
+              }
+            }
+            collections {
+              id
+              label
+              slug
+            }
+          }
+        }
+      }
+      recommendations: productsCollection(first: 4) {
+        edges {
+          node {
+            id
+            ...ProductCardFragment
+          }
+        }
+      }
+    }
+  `;
+  
+  const response = await fetch(graphqlUrl, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      apikey: env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+    },
+    body: JSON.stringify({
+      query,
+      variables: { productSlug: params.slug },
+    }),
+  });
+  
+  const json = await response.json();
+  
+  if (json.errors) {
+    console.error("❌ GraphQL Errors:", json.errors);
+    console.error("❌ Query variables:", { productSlug: params.slug });
+    return notFound();
+  }
+  
+  const data = json.data;
+
+  console.log("📦 Product query result:", {
+    hasData: !!data,
+    hasProductsCollection: !!data?.productsCollection,
+    edgesLength: data?.productsCollection?.edges?.length,
+    slug: params.slug,
   });
 
-  if (!data || !data.productsCollection || !data.productsCollection.edges)
+  if (!data || !data.productsCollection || !data.productsCollection.edges || data.productsCollection.edges.length === 0) {
+    console.error("❌ Product not found:", params.slug);
+    console.error("❌ GraphQL Response:", JSON.stringify(data, null, 2));
     return notFound();
+  }
 
   const { id, name, description, price, commentsCollection, totalComments } =
     data.productsCollection.edges[0].node;

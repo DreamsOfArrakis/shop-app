@@ -12,7 +12,7 @@ const products: InsertProducts[] = [
     badge: "new_product",
     rating: "4",
     tags: [],
-    featuredImageId: "1",
+    featuredImageId: "5", // product-1.jpg
     collectionId: "1",
     stock: 20,
   },
@@ -23,7 +23,7 @@ const products: InsertProducts[] = [
     description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.`,
     rating: "3.5",
     featured: true,
-    featuredImageId: "2",
+    featuredImageId: "6", // product-2.jpg
     collectionId: "2",
     badge: "featured",
     stock: 32,
@@ -35,7 +35,7 @@ const products: InsertProducts[] = [
     featured: true,
     description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.`,
     rating: "5",
-    featuredImageId: "3",
+    featuredImageId: "7", // product-3.jpg
     collectionId: "1",
     stock: 30,
   },
@@ -46,7 +46,7 @@ const products: InsertProducts[] = [
     featured: true,
     description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.`,
     rating: "2",
-    featuredImageId: "4",
+    featuredImageId: "8", // product-4.jpg
     collectionId: "2",
     badge: "best_sale",
     stock: 1,
@@ -58,7 +58,7 @@ const products: InsertProducts[] = [
     featured: true,
     description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.`,
     rating: "5",
-    featuredImageId: "1",
+    featuredImageId: "9", // product-5.jpg
     collectionId: "1",
     badge: "best_sale",
     stock: 0,
@@ -67,14 +67,14 @@ const products: InsertProducts[] = [
 
 const seedProducts = async () => {
   try {
-    await db.delete(schema.products);
     await db
       .insert(schema.products)
       .values(products)
       .onConflictDoNothing()
       .returning();
+    console.log(`Products are added to the DB.`);
   } catch (err) {
-    console.log("Error happen while inserting collections", err);
+    console.log("Error happen while inserting products", err);
   }
 };
 

@@ -57,17 +57,27 @@ function UploadMediaContainer({
         body: formData,
       });
 
-      const data = (await response.json()) as string[];
+      const data = await response.json();
 
-      if (data) {
+      if (!response.ok) {
+        console.error("Upload error:", data);
+        // Remove failed uploads from the uploading list
+        setUploadingImages([]);
+        alert(`Failed to upload images: ${data.message || "Unknown error"}`);
+        return;
+      }
+
+      if (data && Array.isArray(data)) {
         refetch({ requestPolicy: "network-only" });
 
         setUploadingImages(
           uploadingImages.filter((item) => data.includes(item.path)),
         );
       }
-    } catch (error) {
-      // console.error("Error uploading files:", error)
+    } catch (error: any) {
+      console.error("Error uploading files:", error);
+      setUploadingImages([]);
+      alert(`Failed to upload images: ${error.message || "Network error"}`);
     }
   };
 

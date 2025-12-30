@@ -24,7 +24,7 @@ export type Scalars = {
   BigInt: any;
   /** An opaque string using for tracking a position in results during pagination */
   Cursor: any;
-  /** A date wihout time information */
+  /** A date without time information */
   Date: any;
   /** A date and time */
   Datetime: any;
@@ -50,6 +50,15 @@ export type BigFloatFilter = {
   neq?: InputMaybe<Scalars["BigFloat"]>;
 };
 
+/** Boolean expression comparing fields on type "BigFloatList" */
+export type BigFloatListFilter = {
+  containedBy?: InputMaybe<Array<Scalars["BigFloat"]>>;
+  contains?: InputMaybe<Array<Scalars["BigFloat"]>>;
+  eq?: InputMaybe<Array<Scalars["BigFloat"]>>;
+  is?: InputMaybe<FilterIs>;
+  overlaps?: InputMaybe<Array<Scalars["BigFloat"]>>;
+};
+
 /** Boolean expression comparing fields on type "BigInt" */
 export type BigIntFilter = {
   eq?: InputMaybe<Scalars["BigInt"]>;
@@ -62,10 +71,28 @@ export type BigIntFilter = {
   neq?: InputMaybe<Scalars["BigInt"]>;
 };
 
+/** Boolean expression comparing fields on type "BigIntList" */
+export type BigIntListFilter = {
+  containedBy?: InputMaybe<Array<Scalars["BigInt"]>>;
+  contains?: InputMaybe<Array<Scalars["BigInt"]>>;
+  eq?: InputMaybe<Array<Scalars["BigInt"]>>;
+  is?: InputMaybe<FilterIs>;
+  overlaps?: InputMaybe<Array<Scalars["BigInt"]>>;
+};
+
 /** Boolean expression comparing fields on type "Boolean" */
 export type BooleanFilter = {
   eq?: InputMaybe<Scalars["Boolean"]>;
   is?: InputMaybe<FilterIs>;
+};
+
+/** Boolean expression comparing fields on type "BooleanList" */
+export type BooleanListFilter = {
+  containedBy?: InputMaybe<Array<Scalars["Boolean"]>>;
+  contains?: InputMaybe<Array<Scalars["Boolean"]>>;
+  eq?: InputMaybe<Array<Scalars["Boolean"]>>;
+  is?: InputMaybe<FilterIs>;
+  overlaps?: InputMaybe<Array<Scalars["Boolean"]>>;
 };
 
 /** Boolean expression comparing fields on type "Date" */
@@ -80,6 +107,15 @@ export type DateFilter = {
   neq?: InputMaybe<Scalars["Date"]>;
 };
 
+/** Boolean expression comparing fields on type "DateList" */
+export type DateListFilter = {
+  containedBy?: InputMaybe<Array<Scalars["Date"]>>;
+  contains?: InputMaybe<Array<Scalars["Date"]>>;
+  eq?: InputMaybe<Array<Scalars["Date"]>>;
+  is?: InputMaybe<FilterIs>;
+  overlaps?: InputMaybe<Array<Scalars["Date"]>>;
+};
+
 /** Boolean expression comparing fields on type "Datetime" */
 export type DatetimeFilter = {
   eq?: InputMaybe<Scalars["Datetime"]>;
@@ -90,6 +126,15 @@ export type DatetimeFilter = {
   lt?: InputMaybe<Scalars["Datetime"]>;
   lte?: InputMaybe<Scalars["Datetime"]>;
   neq?: InputMaybe<Scalars["Datetime"]>;
+};
+
+/** Boolean expression comparing fields on type "DatetimeList" */
+export type DatetimeListFilter = {
+  containedBy?: InputMaybe<Array<Scalars["Datetime"]>>;
+  contains?: InputMaybe<Array<Scalars["Datetime"]>>;
+  eq?: InputMaybe<Array<Scalars["Datetime"]>>;
+  is?: InputMaybe<FilterIs>;
+  overlaps?: InputMaybe<Array<Scalars["Datetime"]>>;
 };
 
 export enum FilterIs {
@@ -109,6 +154,15 @@ export type FloatFilter = {
   neq?: InputMaybe<Scalars["Float"]>;
 };
 
+/** Boolean expression comparing fields on type "FloatList" */
+export type FloatListFilter = {
+  containedBy?: InputMaybe<Array<Scalars["Float"]>>;
+  contains?: InputMaybe<Array<Scalars["Float"]>>;
+  eq?: InputMaybe<Array<Scalars["Float"]>>;
+  is?: InputMaybe<FilterIs>;
+  overlaps?: InputMaybe<Array<Scalars["Float"]>>;
+};
+
 /** Boolean expression comparing fields on type "ID" */
 export type IdFilter = {
   eq?: InputMaybe<Scalars["ID"]>;
@@ -126,10 +180,18 @@ export type IntFilter = {
   neq?: InputMaybe<Scalars["Int"]>;
 };
 
+/** Boolean expression comparing fields on type "IntList" */
+export type IntListFilter = {
+  containedBy?: InputMaybe<Array<Scalars["Int"]>>;
+  contains?: InputMaybe<Array<Scalars["Int"]>>;
+  eq?: InputMaybe<Array<Scalars["Int"]>>;
+  is?: InputMaybe<FilterIs>;
+  overlaps?: InputMaybe<Array<Scalars["Int"]>>;
+};
+
 /** The root type for creating and mutating data */
 export type Mutation = {
   __typename?: "Mutation";
-  custom_access_token_hook?: Maybe<Scalars["JSON"]>;
   /** Deletes zero or more records from the `address` collection */
   deleteFromaddressCollection: AddressDeleteResponse;
   /** Deletes zero or more records from the `carts` collection */
@@ -196,11 +258,6 @@ export type Mutation = {
   updateprofilesCollection: ProfilesUpdateResponse;
   /** Updates zero or more records in the `wishlist` collection */
   updatewishlistCollection: WishlistUpdateResponse;
-};
-
-/** The root type for creating and mutating data */
-export type MutationCustom_Access_Token_HookArgs = {
-  event?: InputMaybe<Scalars["JSON"]>;
 };
 
 /** The root type for creating and mutating data */
@@ -468,6 +525,7 @@ export type QueryAddressCollectionArgs = {
   filter?: InputMaybe<AddressFilter>;
   first?: InputMaybe<Scalars["Int"]>;
   last?: InputMaybe<Scalars["Int"]>;
+  offset?: InputMaybe<Scalars["Int"]>;
   orderBy?: InputMaybe<Array<AddressOrderBy>>;
 };
 
@@ -478,6 +536,7 @@ export type QueryCartsCollectionArgs = {
   filter?: InputMaybe<CartsFilter>;
   first?: InputMaybe<Scalars["Int"]>;
   last?: InputMaybe<Scalars["Int"]>;
+  offset?: InputMaybe<Scalars["Int"]>;
   orderBy?: InputMaybe<Array<CartsOrderBy>>;
 };
 
@@ -488,6 +547,7 @@ export type QueryCollectionsCollectionArgs = {
   filter?: InputMaybe<CollectionsFilter>;
   first?: InputMaybe<Scalars["Int"]>;
   last?: InputMaybe<Scalars["Int"]>;
+  offset?: InputMaybe<Scalars["Int"]>;
   orderBy?: InputMaybe<Array<CollectionsOrderBy>>;
 };
 
@@ -498,6 +558,7 @@ export type QueryCommentsCollectionArgs = {
   filter?: InputMaybe<CommentsFilter>;
   first?: InputMaybe<Scalars["Int"]>;
   last?: InputMaybe<Scalars["Int"]>;
+  offset?: InputMaybe<Scalars["Int"]>;
   orderBy?: InputMaybe<Array<CommentsOrderBy>>;
 };
 
@@ -508,6 +569,7 @@ export type QueryMediasCollectionArgs = {
   filter?: InputMaybe<MediasFilter>;
   first?: InputMaybe<Scalars["Int"]>;
   last?: InputMaybe<Scalars["Int"]>;
+  offset?: InputMaybe<Scalars["Int"]>;
   orderBy?: InputMaybe<Array<MediasOrderBy>>;
 };
 
@@ -523,6 +585,7 @@ export type QueryOrder_LinesCollectionArgs = {
   filter?: InputMaybe<Order_LinesFilter>;
   first?: InputMaybe<Scalars["Int"]>;
   last?: InputMaybe<Scalars["Int"]>;
+  offset?: InputMaybe<Scalars["Int"]>;
   orderBy?: InputMaybe<Array<Order_LinesOrderBy>>;
 };
 
@@ -533,6 +596,7 @@ export type QueryOrdersCollectionArgs = {
   filter?: InputMaybe<OrdersFilter>;
   first?: InputMaybe<Scalars["Int"]>;
   last?: InputMaybe<Scalars["Int"]>;
+  offset?: InputMaybe<Scalars["Int"]>;
   orderBy?: InputMaybe<Array<OrdersOrderBy>>;
 };
 
@@ -543,6 +607,7 @@ export type QueryProduct_MediasCollectionArgs = {
   filter?: InputMaybe<Product_MediasFilter>;
   first?: InputMaybe<Scalars["Int"]>;
   last?: InputMaybe<Scalars["Int"]>;
+  offset?: InputMaybe<Scalars["Int"]>;
   orderBy?: InputMaybe<Array<Product_MediasOrderBy>>;
 };
 
@@ -553,6 +618,7 @@ export type QueryProductsCollectionArgs = {
   filter?: InputMaybe<ProductsFilter>;
   first?: InputMaybe<Scalars["Int"]>;
   last?: InputMaybe<Scalars["Int"]>;
+  offset?: InputMaybe<Scalars["Int"]>;
   orderBy?: InputMaybe<Array<ProductsOrderBy>>;
 };
 
@@ -563,6 +629,7 @@ export type QueryProfilesCollectionArgs = {
   filter?: InputMaybe<ProfilesFilter>;
   first?: InputMaybe<Scalars["Int"]>;
   last?: InputMaybe<Scalars["Int"]>;
+  offset?: InputMaybe<Scalars["Int"]>;
   orderBy?: InputMaybe<Array<ProfilesOrderBy>>;
 };
 
@@ -573,6 +640,7 @@ export type QueryWishlistCollectionArgs = {
   filter?: InputMaybe<WishlistFilter>;
   first?: InputMaybe<Scalars["Int"]>;
   last?: InputMaybe<Scalars["Int"]>;
+  offset?: InputMaybe<Scalars["Int"]>;
   orderBy?: InputMaybe<Array<WishlistOrderBy>>;
 };
 
@@ -593,6 +661,15 @@ export type StringFilter = {
   startsWith?: InputMaybe<Scalars["String"]>;
 };
 
+/** Boolean expression comparing fields on type "StringList" */
+export type StringListFilter = {
+  containedBy?: InputMaybe<Array<Scalars["String"]>>;
+  contains?: InputMaybe<Array<Scalars["String"]>>;
+  eq?: InputMaybe<Array<Scalars["String"]>>;
+  is?: InputMaybe<FilterIs>;
+  overlaps?: InputMaybe<Array<Scalars["String"]>>;
+};
+
 /** Boolean expression comparing fields on type "Time" */
 export type TimeFilter = {
   eq?: InputMaybe<Scalars["Time"]>;
@@ -605,12 +682,30 @@ export type TimeFilter = {
   neq?: InputMaybe<Scalars["Time"]>;
 };
 
+/** Boolean expression comparing fields on type "TimeList" */
+export type TimeListFilter = {
+  containedBy?: InputMaybe<Array<Scalars["Time"]>>;
+  contains?: InputMaybe<Array<Scalars["Time"]>>;
+  eq?: InputMaybe<Array<Scalars["Time"]>>;
+  is?: InputMaybe<FilterIs>;
+  overlaps?: InputMaybe<Array<Scalars["Time"]>>;
+};
+
 /** Boolean expression comparing fields on type "UUID" */
 export type UuidFilter = {
   eq?: InputMaybe<Scalars["UUID"]>;
   in?: InputMaybe<Array<Scalars["UUID"]>>;
   is?: InputMaybe<FilterIs>;
   neq?: InputMaybe<Scalars["UUID"]>;
+};
+
+/** Boolean expression comparing fields on type "UUIDList" */
+export type UuidListFilter = {
+  containedBy?: InputMaybe<Array<Scalars["UUID"]>>;
+  contains?: InputMaybe<Array<Scalars["UUID"]>>;
+  eq?: InputMaybe<Array<Scalars["UUID"]>>;
+  is?: InputMaybe<FilterIs>;
+  overlaps?: InputMaybe<Array<Scalars["UUID"]>>;
 };
 
 export type Address = Node & {
@@ -818,6 +913,7 @@ export type CollectionsProductsCollectionArgs = {
   filter?: InputMaybe<ProductsFilter>;
   first?: InputMaybe<Scalars["Int"]>;
   last?: InputMaybe<Scalars["Int"]>;
+  offset?: InputMaybe<Scalars["Int"]>;
   orderBy?: InputMaybe<Array<ProductsOrderBy>>;
 };
 
@@ -1012,6 +1108,7 @@ export type MediasCollectionsCollectionArgs = {
   filter?: InputMaybe<CollectionsFilter>;
   first?: InputMaybe<Scalars["Int"]>;
   last?: InputMaybe<Scalars["Int"]>;
+  offset?: InputMaybe<Scalars["Int"]>;
   orderBy?: InputMaybe<Array<CollectionsOrderBy>>;
 };
 
@@ -1021,6 +1118,7 @@ export type MediasProduct_MediasCollectionArgs = {
   filter?: InputMaybe<Product_MediasFilter>;
   first?: InputMaybe<Scalars["Int"]>;
   last?: InputMaybe<Scalars["Int"]>;
+  offset?: InputMaybe<Scalars["Int"]>;
   orderBy?: InputMaybe<Array<Product_MediasOrderBy>>;
 };
 
@@ -1030,6 +1128,7 @@ export type MediasProductsCollectionArgs = {
   filter?: InputMaybe<ProductsFilter>;
   first?: InputMaybe<Scalars["Int"]>;
   last?: InputMaybe<Scalars["Int"]>;
+  offset?: InputMaybe<Scalars["Int"]>;
   orderBy?: InputMaybe<Array<ProductsOrderBy>>;
 };
 
@@ -1227,6 +1326,7 @@ export type OrdersOrder_LinesCollectionArgs = {
   filter?: InputMaybe<Order_LinesFilter>;
   first?: InputMaybe<Scalars["Int"]>;
   last?: InputMaybe<Scalars["Int"]>;
+  offset?: InputMaybe<Scalars["Int"]>;
   orderBy?: InputMaybe<Array<Order_LinesOrderBy>>;
 };
 
@@ -1450,6 +1550,7 @@ export type ProductsCartsCollectionArgs = {
   filter?: InputMaybe<CartsFilter>;
   first?: InputMaybe<Scalars["Int"]>;
   last?: InputMaybe<Scalars["Int"]>;
+  offset?: InputMaybe<Scalars["Int"]>;
   orderBy?: InputMaybe<Array<CartsOrderBy>>;
 };
 
@@ -1459,6 +1560,7 @@ export type ProductsCommentsCollectionArgs = {
   filter?: InputMaybe<CommentsFilter>;
   first?: InputMaybe<Scalars["Int"]>;
   last?: InputMaybe<Scalars["Int"]>;
+  offset?: InputMaybe<Scalars["Int"]>;
   orderBy?: InputMaybe<Array<CommentsOrderBy>>;
 };
 
@@ -1468,6 +1570,7 @@ export type ProductsOrder_LinesCollectionArgs = {
   filter?: InputMaybe<Order_LinesFilter>;
   first?: InputMaybe<Scalars["Int"]>;
   last?: InputMaybe<Scalars["Int"]>;
+  offset?: InputMaybe<Scalars["Int"]>;
   orderBy?: InputMaybe<Array<Order_LinesOrderBy>>;
 };
 
@@ -1477,6 +1580,7 @@ export type ProductsProduct_MediasCollectionArgs = {
   filter?: InputMaybe<Product_MediasFilter>;
   first?: InputMaybe<Scalars["Int"]>;
   last?: InputMaybe<Scalars["Int"]>;
+  offset?: InputMaybe<Scalars["Int"]>;
   orderBy?: InputMaybe<Array<Product_MediasOrderBy>>;
 };
 
@@ -1486,6 +1590,7 @@ export type ProductsWishlistCollectionArgs = {
   filter?: InputMaybe<WishlistFilter>;
   first?: InputMaybe<Scalars["Int"]>;
   last?: InputMaybe<Scalars["Int"]>;
+  offset?: InputMaybe<Scalars["Int"]>;
   orderBy?: InputMaybe<Array<WishlistOrderBy>>;
 };
 
@@ -1620,6 +1725,7 @@ export type ProfilesAddressCollectionArgs = {
   filter?: InputMaybe<AddressFilter>;
   first?: InputMaybe<Scalars["Int"]>;
   last?: InputMaybe<Scalars["Int"]>;
+  offset?: InputMaybe<Scalars["Int"]>;
   orderBy?: InputMaybe<Array<AddressOrderBy>>;
 };
 
@@ -1629,6 +1735,7 @@ export type ProfilesCommentsCollectionArgs = {
   filter?: InputMaybe<CommentsFilter>;
   first?: InputMaybe<Scalars["Int"]>;
   last?: InputMaybe<Scalars["Int"]>;
+  offset?: InputMaybe<Scalars["Int"]>;
   orderBy?: InputMaybe<Array<CommentsOrderBy>>;
 };
 
@@ -1638,6 +1745,7 @@ export type ProfilesOrdersCollectionArgs = {
   filter?: InputMaybe<OrdersFilter>;
   first?: InputMaybe<Scalars["Int"]>;
   last?: InputMaybe<Scalars["Int"]>;
+  offset?: InputMaybe<Scalars["Int"]>;
   orderBy?: InputMaybe<Array<OrdersOrderBy>>;
 };
 
@@ -2181,6 +2289,19 @@ export type ProductDetailPageQueryQuery = {
           slug: string;
         } | null;
       };
+    }>;
+  } | null;
+};
+
+export type TestQueryQueryVariables = Exact<{ [key: string]: never }>;
+
+export type TestQueryQuery = {
+  __typename?: "Query";
+  productsCollection?: {
+    __typename?: "productsConnection";
+    edges: Array<{
+      __typename?: "productsEdge";
+      node: { __typename?: "products"; id: string; name: string };
     }>;
   } | null;
 };
@@ -5320,6 +5441,63 @@ export const ProductDetailPageQueryDocument = {
   ProductDetailPageQueryQuery,
   ProductDetailPageQueryQueryVariables
 >;
+export const TestQueryDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "TestQuery" },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "productsCollection" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "first" },
+                value: { kind: "IntValue", value: "1" },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "edges" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "node" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "id" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "name" },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<TestQueryQuery, TestQueryQueryVariables>;
 export const FetchGuestCartQueryDocument = {
   kind: "Document",
   definitions: [
