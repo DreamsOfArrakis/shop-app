@@ -1,9 +1,9 @@
 /**
  * Simple script to upload a single image to Supabase Storage
- * 
+ *
  * Usage:
  *   npx tsx scripts/upload-single-image.ts <path-to-image> <storage-path>
- * 
+ *
  * Example:
  *   npx tsx scripts/upload-single-image.ts ./my-image.jpg public/my-image.jpg
  */
@@ -15,8 +15,13 @@ import { join } from "path";
 
 // Load environment variables
 dotenv.config({ path: ".env.local" });
-if (!process.env.DATABASE_SERVICE_ROLE || !process.env.NEXT_PUBLIC_SUPABASE_PROJECT_REF) {
-  throw new Error("Missing required environment variables. Make sure .env.local has DATABASE_SERVICE_ROLE and NEXT_PUBLIC_SUPABASE_PROJECT_REF");
+if (
+  !process.env.DATABASE_SERVICE_ROLE ||
+  !process.env.NEXT_PUBLIC_SUPABASE_PROJECT_REF
+) {
+  throw new Error(
+    "Missing required environment variables. Make sure .env.local has DATABASE_SERVICE_ROLE and NEXT_PUBLIC_SUPABASE_PROJECT_REF",
+  );
 }
 
 const supabaseUrl = `https://${process.env.NEXT_PUBLIC_SUPABASE_PROJECT_REF}.supabase.co`;
@@ -25,22 +30,28 @@ const supabase = createClient(supabaseUrl, process.env.DATABASE_SERVICE_ROLE);
 async function uploadImage(imagePath: string, storagePath: string) {
   try {
     console.log(`📤 Reading image from: ${imagePath}`);
-    
+
     // Read the image file
     const imageBuffer = readFileSync(imagePath);
-    
+
     // Get file extension to determine content type
-    const ext = imagePath.split('.').pop()?.toLowerCase();
-    const contentType = ext === 'png' ? 'image/png' : 
-                       ext === 'gif' ? 'image/gif' : 
-                       ext === 'webp' ? 'image/webp' : 
-                       'image/jpeg';
-    
+    const ext = imagePath.split(".").pop()?.toLowerCase();
+    const contentType =
+      ext === "png"
+        ? "image/png"
+        : ext === "gif"
+          ? "image/gif"
+          : ext === "webp"
+            ? "image/webp"
+            : "image/jpeg";
+
     // Ensure storage path starts with 'public/'
-    const finalPath = storagePath.startsWith('public/') ? storagePath : `public/${storagePath}`;
-    
+    const finalPath = storagePath.startsWith("public/")
+      ? storagePath
+      : `public/${storagePath}`;
+
     console.log(`📤 Uploading to: ${finalPath}`);
-    
+
     // Upload to Supabase Storage
     const { data, error } = await supabase.storage
       .from("media")
@@ -56,8 +67,9 @@ async function uploadImage(imagePath: string, storagePath: string) {
 
     console.log(`✅ Successfully uploaded to: ${data.path}`);
     console.log(`\n📋 Full URL:`);
-    console.log(`   https://${process.env.NEXT_PUBLIC_SUPABASE_PROJECT_REF}.supabase.co/storage/v1/object/public/media/${finalPath.replace('public/', '')}`);
-    
+    console.log(
+      `   https://${process.env.NEXT_PUBLIC_SUPABASE_PROJECT_REF}.supabase.co/storage/v1/object/public/media/${finalPath.replace("public/", "")}`,
+    );
   } catch (error: any) {
     console.error(`❌ Error:`, error.message);
     process.exit(1);
@@ -83,4 +95,3 @@ Note: Storage path should start with 'public/' (it will be added automatically i
 const [imagePath, storagePath] = args;
 
 uploadImage(imagePath, storagePath);
-

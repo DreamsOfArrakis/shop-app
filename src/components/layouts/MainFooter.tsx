@@ -13,78 +13,23 @@ function MainFooter({}: Props) {
       title: "Shop",
       items: [
         {
-          title: "Furniture",
-          href: "/collections/furniture",
+          title: "Living Room",
+          href: "/collections/living-room-planning",
           items: [],
         },
         {
-          title: "Lighting",
-          disabled: true,
+          title: "Bathroom",
+          href: "/collections/bathroom",
           items: [],
         },
         {
-          title: "Rugs",
-          disabled: true,
+          title: "Kitchen",
+          href: "/collections/kitchen-planning",
           items: [],
         },
         {
-          title: "New",
-          disabled: true,
-          items: [],
-        },
-        {
-          title: "Sale",
-          disabled: true,
-          items: [],
-        },
-      ],
-    },
-    {
-      title: "Customer Service",
-      items: [
-        {
-          title: "Shipping & Returns",
-          disabled: true,
-          items: [],
-        },
-        {
-          title: "Store Policy",
-          disabled: true,
-          items: [],
-        },
-        {
-          title: "Payment Methods",
-          disabled: true,
-          items: [],
-        },
-        {
-          title: "FAQ",
-          disabled: true,
-          items: [],
-        },
-      ],
-    },
-    {
-      title: "About THE FURNITURE STORE",
-      items: [
-        {
-          title: "Our Story",
-          href: "https://github.com/clonglam/HIYORI-master",
-          items: [],
-        },
-        {
-          title: "Brands & Designers",
-          disabled: true,
-          items: [],
-        },
-        {
-          title: "Stores",
-          disabled: true,
-          items: [],
-        },
-        {
-          title: "Contact",
-          disabled: true,
+          title: "Bedroom",
+          href: "/collections/Bedroom-planning",
           items: [],
         },
       ],
@@ -92,7 +37,7 @@ function MainFooter({}: Props) {
   ];
 
   return (
-    <footer className="bg-muted-background mt-[80px] md:mt-[180px] border-t border-zinc-600">
+    <footer className="bg-muted-background mt-12 md:mt-16 border-t border-zinc-600">
       <div className="container pb-10 pt-4 md:pt-8">
         <div className="hidden md:grid grid-cols-5 mb-[80px] gap-x-[100px] place-content-between space-y-9">
           <div className="max-w-md col-span-5 lg:col-span-2">
@@ -104,14 +49,21 @@ function MainFooter({}: Props) {
               <div key={index}>
                 <p className="font-semibold mb-3">{title}</p>
                 <div className="flex flex-col gap-y-2 flex-wrap">
-                  {items?.map((i, index) => (
-                    <Link href={i.href || ""} key={index} className="text-sm">
-                      {i.title}
-                    </Link>
-                  ))}
+                  {items?.map((i, index) => 
+                    i.href && !i.disabled ? (
+                      <Link href={i.href} key={index} className="text-sm">
+                        {i.title}
+                      </Link>
+                    ) : null
+                  )}
                 </div>
               </div>
             ))}
+            <div className="col-span-2">
+              <p className="text-sm text-muted-foreground leading-relaxed max-w-md">
+                {siteConfig.disclaimer}
+              </p>
+            </div>
           </div>
         </div>
 
@@ -120,16 +72,7 @@ function MainFooter({}: Props) {
           <div className="flex flex-col md:flex-row gap-x-5 md:items-center items-start mb-4 md:mb-0">
             <Branding className="text-3xl" />
             <div className="text-[10px] font-light">
-              <p>{siteConfig.address}</p>
-              <p>
-                {siteConfig.phone} /{" "}
-                <Link
-                  className="hover:underline hover:text-primary"
-                  href={`mailto:${siteConfig.email}`}
-                >
-                  {siteConfig.email}
-                </Link>
-              </p>
+              <p className="whitespace-pre-line">{siteConfig.address}</p>
             </div>
           </div>
 

@@ -73,7 +73,7 @@ async function ProductDetailPage({ params }: Props) {
   // Use direct fetch since URQL has issues with fragments
   const { env } = await import("@/env.mjs");
   const graphqlUrl = `https://${env.NEXT_PUBLIC_SUPABASE_PROJECT_REF}.supabase.co/graphql/v1`;
-  
+
   // Include fragment definitions in the query
   const query = `
     fragment ProductImageShowcaseFragment on products {
@@ -161,7 +161,7 @@ async function ProductDetailPage({ params }: Props) {
       }
     }
   `;
-  
+
   const response = await fetch(graphqlUrl, {
     method: "POST",
     headers: {
@@ -173,15 +173,15 @@ async function ProductDetailPage({ params }: Props) {
       variables: { productSlug: params.slug },
     }),
   });
-  
+
   const json = await response.json();
-  
+
   if (json.errors) {
     console.error("❌ GraphQL Errors:", json.errors);
     console.error("❌ Query variables:", { productSlug: params.slug });
     return notFound();
   }
-  
+
   const data = json.data;
 
   console.log("📦 Product query result:", {
@@ -191,7 +191,12 @@ async function ProductDetailPage({ params }: Props) {
     slug: params.slug,
   });
 
-  if (!data || !data.productsCollection || !data.productsCollection.edges || data.productsCollection.edges.length === 0) {
+  if (
+    !data ||
+    !data.productsCollection ||
+    !data.productsCollection.edges ||
+    data.productsCollection.edges.length === 0
+  ) {
     console.error("❌ Product not found:", params.slug);
     console.error("❌ GraphQL Response:", JSON.stringify(data, null, 2));
     return notFound();
@@ -235,19 +240,21 @@ async function ProductDetailPage({ params }: Props) {
                 <AccordionContent>
                   <div className="space-y-3">
                     <p>
-                      This piece features a timeless design that seamlessly blends
-                      functionality with modern aesthetics. Crafted with attention to
-                      detail, it&apos;s built to last and designed to enhance any living space.
+                      This piece features a timeless design that seamlessly
+                      blends functionality with modern aesthetics. Crafted with
+                      attention to detail, it&apos;s built to last and designed
+                      to enhance any living space.
                     </p>
                     <p>
-                      The furniture is constructed from high-quality materials and
-                      finished with a durable protective coating. Each piece is carefully
-                      inspected to ensure it meets our quality standards before shipping.
+                      The furniture is constructed from high-quality materials
+                      and finished with a durable protective coating. Each piece
+                      is carefully inspected to ensure it meets our quality
+                      standards before shipping.
                     </p>
                     <p>
-                      Perfect for modern homes, apartments, and office spaces. The design
-                      complements a variety of interior styles from contemporary to
-                      minimalist.
+                      Perfect for modern homes, apartments, and office spaces.
+                      The design complements a variety of interior styles from
+                      contemporary to minimalist.
                     </p>
                   </div>
                 </AccordionContent>
@@ -257,27 +264,29 @@ async function ProductDetailPage({ params }: Props) {
                 <AccordionContent>
                   <div className="space-y-3">
                     <div>
-                      <strong>Dimensions:</strong> Please refer to product specifications
-                      for exact measurements. Standard sizing ensures compatibility with
-                      most room layouts.
+                      <strong>Dimensions:</strong> Please refer to product
+                      specifications for exact measurements. Standard sizing
+                      ensures compatibility with most room layouts.
                     </div>
                     <div>
-                      <strong>Weight Capacity:</strong> Designed to support standard
-                      household use. Maximum weight capacity varies by model.
+                      <strong>Weight Capacity:</strong> Designed to support
+                      standard household use. Maximum weight capacity varies by
+                      model.
                     </div>
                     <div>
-                      <strong>Assembly:</strong> Some assembly required. All necessary
-                      hardware and detailed instructions included. Estimated assembly time:
-                      30-60 minutes.
+                      <strong>Assembly:</strong> Some assembly required. All
+                      necessary hardware and detailed instructions included.
+                      Estimated assembly time: 30-60 minutes.
                     </div>
                     <div>
-                      <strong>Care Instructions:</strong> Clean with a soft, damp cloth.
-                      Avoid harsh chemicals or abrasive cleaners. For wood surfaces, use
-                      furniture polish as needed.
+                      <strong>Care Instructions:</strong> Clean with a soft,
+                      damp cloth. Avoid harsh chemicals or abrasive cleaners.
+                      For wood surfaces, use furniture polish as needed.
                     </div>
                     <div>
-                      <strong>Warranty:</strong> One-year limited warranty covering
-                      manufacturing defects. Warranty details provided with purchase.
+                      <strong>Warranty:</strong> One-year limited warranty
+                      covering manufacturing defects. Warranty details provided
+                      with purchase.
                     </div>
                   </div>
                 </AccordionContent>

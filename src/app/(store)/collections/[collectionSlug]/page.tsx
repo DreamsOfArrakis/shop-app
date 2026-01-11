@@ -65,7 +65,7 @@ async function CategoryPage({ params, searchParams }: CategoryPageProps) {
   // Use direct fetch since URQL has issues with fragments
   const { env } = await import("@/env.mjs");
   const graphqlUrl = `https://${env.NEXT_PUBLIC_SUPABASE_PROJECT_REF}.supabase.co/graphql/v1`;
-  
+
   // Include fragment definitions in the query
   const query = `
     fragment CollectionBannerFragment on collections {
@@ -127,7 +127,7 @@ async function CategoryPage({ params, searchParams }: CategoryPageProps) {
       }
     }
   `;
-  
+
   const response = await fetch(graphqlUrl, {
     method: "POST",
     headers: {
@@ -139,14 +139,14 @@ async function CategoryPage({ params, searchParams }: CategoryPageProps) {
       variables: { collectionSlug },
     }),
   });
-  
+
   const json = await response.json();
-  
+
   if (json.errors) {
     console.error("❌ GraphQL Errors:", json.errors);
     return notFound();
   }
-  
+
   const data = json.data;
 
   // Check if collection exists

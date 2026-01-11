@@ -1,7 +1,13 @@
 "use client";
 
 import { Component, ReactNode } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
 interface Props {
@@ -38,7 +44,9 @@ export class ErrorBoundary extends Component<Props, State> {
         <div className="container mx-auto p-8">
           <Card className="border-red-500">
             <CardHeader>
-              <CardTitle className="text-red-600">Something went wrong</CardTitle>
+              <CardTitle className="text-red-600">
+                Something went wrong
+              </CardTitle>
               <CardDescription>
                 An error occurred while rendering this page
               </CardDescription>
@@ -89,4 +97,3 @@ export class ErrorBoundary extends Component<Props, State> {
     return this.props.children;
   }
 }
-

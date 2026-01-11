@@ -92,11 +92,13 @@ export async function GET() {
     debugInfo.tests.urqlQuery = {
       success: !error,
       hasData: !!data,
-      error: error ? {
-        message: error.message,
-        networkError: error.networkError?.message,
-        graphQLErrors: error.graphQLErrors,
-      } : null,
+      error: error
+        ? {
+            message: error.message,
+            networkError: error.networkError?.message,
+            graphQLErrors: error.graphQLErrors,
+          }
+        : null,
       data: data ? Object.keys(data) : null,
     };
   } catch (error: any) {
@@ -128,7 +130,7 @@ export async function GET() {
         }
       }
     `;
-    
+
     const response = await fetch(graphqlUrl, {
       method: "POST",
       headers: {
@@ -151,11 +153,14 @@ export async function GET() {
       debugInfo.tests.collectionsQuery.success = !result.errors;
       debugInfo.tests.collectionsQuery.hasData = !!result.data;
       debugInfo.tests.collectionsQuery.error = result.errors || null;
-      debugInfo.tests.collectionsQuery.data = result.data ? {
-        hasCollections: !!result.data.collectionsCollection,
-        edgesCount: result.data.collectionsCollection?.edges?.length || 0,
-        firstCollection: result.data.collectionsCollection?.edges?.[0]?.node || null,
-      } : null;
+      debugInfo.tests.collectionsQuery.data = result.data
+        ? {
+            hasCollections: !!result.data.collectionsCollection,
+            edgesCount: result.data.collectionsCollection?.edges?.length || 0,
+            firstCollection:
+              result.data.collectionsCollection?.edges?.[0]?.node || null,
+          }
+        : null;
     } else {
       debugInfo.tests.collectionsQuery.error = await response.text();
     }
@@ -185,7 +190,9 @@ export async function GET() {
     if (response.ok) {
       const data = await response.json();
       debugInfo.tests.restEndpoint.hasData = Array.isArray(data);
-      debugInfo.tests.restEndpoint.dataCount = Array.isArray(data) ? data.length : 0;
+      debugInfo.tests.restEndpoint.dataCount = Array.isArray(data)
+        ? data.length
+        : 0;
     } else {
       debugInfo.tests.restEndpoint.error = await response.text();
     }
@@ -212,7 +219,7 @@ export async function GET() {
         }
       }
     `;
-    
+
     const response = await fetch(graphqlUrl, {
       method: "POST",
       headers: {
@@ -235,11 +242,14 @@ export async function GET() {
       debugInfo.tests.productQuery.success = !result.errors;
       debugInfo.tests.productQuery.hasData = !!result.data;
       debugInfo.tests.productQuery.error = result.errors || null;
-      debugInfo.tests.productQuery.data = result.data ? {
-        hasProducts: !!result.data.productsCollection,
-        edgesCount: result.data.productsCollection?.edges?.length || 0,
-        firstProduct: result.data.productsCollection?.edges?.[0]?.node || null,
-      } : null;
+      debugInfo.tests.productQuery.data = result.data
+        ? {
+            hasProducts: !!result.data.productsCollection,
+            edgesCount: result.data.productsCollection?.edges?.length || 0,
+            firstProduct:
+              result.data.productsCollection?.edges?.[0]?.node || null,
+          }
+        : null;
     } else {
       debugInfo.tests.productQuery.error = await response.text();
     }
@@ -252,4 +262,3 @@ export async function GET() {
 
   return NextResponse.json(debugInfo, { status: 200 });
 }
-

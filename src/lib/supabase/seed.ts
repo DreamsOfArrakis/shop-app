@@ -31,7 +31,7 @@ const seeddata = async () => {
   } catch (err) {
     console.log("Error deleting existing data:", err);
   }
-  
+
   // Seed in order: medias first, then collections (which reference medias), then products (which reference both)
   await seed.medias();
   await seed.collections();

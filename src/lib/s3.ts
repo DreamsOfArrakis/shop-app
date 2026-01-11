@@ -15,7 +15,7 @@ export const uploadImage = async (file: File, path: string) => {
       auth: {
         persistSession: false, // Don't persist session for server-side operations
       },
-    }
+    },
   );
 
   const { data, error } = await supabase.storage

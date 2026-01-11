@@ -22,11 +22,13 @@ function CollectionBanner({
   collectionBannerData: DocumentType<typeof CollectionBannerFragment>;
 }) {
   const { label, featuredImage } = collectionBannerData;
-  
+
   // Handle missing featured image gracefully
-  const imageSrc = featuredImage?.key ? keytoUrl(featuredImage.key) : "https://placehold.co/720x400/e5e7eb/9ca3af?text=Collection";
+  const imageSrc = featuredImage?.key
+    ? keytoUrl(featuredImage.key)
+    : "https://placehold.co/720x400/e5e7eb/9ca3af?text=Collection";
   const imageAlt = featuredImage?.alt || label || "Collection";
-  
+
   return (
     <div className="relative w-full md:container-2xl mx-auto h-[220px] md:h-[280px] overflow-hidden object-center object-cover mb-8">
       <Image

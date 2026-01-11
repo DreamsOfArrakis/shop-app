@@ -1,7 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
@@ -53,21 +59,23 @@ export default function DebugPage() {
         </CardHeader>
         <CardContent>
           <div className="space-y-2">
-            {Object.entries(debugInfo?.environment || {}).map(([key, value]) => (
-              <div key={key} className="flex items-center gap-2">
-                <span className="font-mono text-sm">{key}:</span>
-                {typeof value === "boolean" ? (
-                  <Badge variant={value ? "default" : "destructive"}>
-                    {value ? "✓ Set" : "✗ Missing"}
-                  </Badge>
-                ) : (
-                  <span className="text-sm text-muted-foreground">
-                    {String(value).substring(0, 50)}
-                    {String(value).length > 50 ? "..." : ""}
-                  </span>
-                )}
-              </div>
-            ))}
+            {Object.entries(debugInfo?.environment || {}).map(
+              ([key, value]) => (
+                <div key={key} className="flex items-center gap-2">
+                  <span className="font-mono text-sm">{key}:</span>
+                  {typeof value === "boolean" ? (
+                    <Badge variant={value ? "default" : "destructive"}>
+                      {value ? "✓ Set" : "✗ Missing"}
+                    </Badge>
+                  ) : (
+                    <span className="text-sm text-muted-foreground">
+                      {String(value).substring(0, 50)}
+                      {String(value).length > 50 ? "..." : ""}
+                    </span>
+                  )}
+                </div>
+              ),
+            )}
           </div>
         </CardContent>
       </Card>
@@ -85,7 +93,9 @@ export default function DebugPage() {
                 <span>Status:</span>
                 <Badge
                   variant={
-                    debugInfo.tests.graphqlEndpoint.ok ? "default" : "destructive"
+                    debugInfo.tests.graphqlEndpoint.ok
+                      ? "default"
+                      : "destructive"
                   }
                 >
                   {debugInfo.tests.graphqlEndpoint.status}{" "}
@@ -94,14 +104,19 @@ export default function DebugPage() {
               </div>
               {debugInfo.tests.graphqlEndpoint.error && (
                 <div className="p-3 bg-red-50 dark:bg-red-900/20 rounded text-sm">
-                  <strong>Error:</strong> {debugInfo.tests.graphqlEndpoint.error}
+                  <strong>Error:</strong>{" "}
+                  {debugInfo.tests.graphqlEndpoint.error}
                 </div>
               )}
               {debugInfo.tests.graphqlEndpoint.data && (
                 <div className="p-3 bg-green-50 dark:bg-green-900/20 rounded text-sm">
                   <strong>Response:</strong>{" "}
                   <pre className="mt-2">
-                    {JSON.stringify(debugInfo.tests.graphqlEndpoint.data, null, 2)}
+                    {JSON.stringify(
+                      debugInfo.tests.graphqlEndpoint.data,
+                      null,
+                      2,
+                    )}
                   </pre>
                 </div>
               )}
@@ -116,7 +131,9 @@ export default function DebugPage() {
       <Card>
         <CardHeader>
           <CardTitle>URQL Client Test</CardTitle>
-          <CardDescription>Testing GraphQL queries through URQL</CardDescription>
+          <CardDescription>
+            Testing GraphQL queries through URQL
+          </CardDescription>
         </CardHeader>
         <CardContent>
           {debugInfo?.tests?.urqlQuery ? (
@@ -124,7 +141,11 @@ export default function DebugPage() {
               <div className="flex items-center gap-2">
                 <span>Status:</span>
                 <Badge
-                  variant={debugInfo.tests.urqlQuery.success ? "default" : "destructive"}
+                  variant={
+                    debugInfo.tests.urqlQuery.success
+                      ? "default"
+                      : "destructive"
+                  }
                 >
                   {debugInfo.tests.urqlQuery.success ? "✓ Success" : "✗ Failed"}
                 </Badge>
@@ -139,7 +160,8 @@ export default function DebugPage() {
               )}
               {debugInfo.tests.urqlQuery.data && (
                 <div className="p-3 bg-green-50 dark:bg-green-900/20 rounded text-sm">
-                  <strong>Data Keys:</strong> {debugInfo.tests.urqlQuery.data.join(", ")}
+                  <strong>Data Keys:</strong>{" "}
+                  {debugInfo.tests.urqlQuery.data.join(", ")}
                 </div>
               )}
             </div>
@@ -153,7 +175,9 @@ export default function DebugPage() {
       <Card>
         <CardHeader>
           <CardTitle>REST Endpoint Test</CardTitle>
-          <CardDescription>Testing Supabase REST API (fallback)</CardDescription>
+          <CardDescription>
+            Testing Supabase REST API (fallback)
+          </CardDescription>
         </CardHeader>
         <CardContent>
           {debugInfo?.tests?.restEndpoint ? (
@@ -161,15 +185,17 @@ export default function DebugPage() {
               <div className="flex items-center gap-2">
                 <span>Status:</span>
                 <Badge
-                  variant={debugInfo.tests.restEndpoint.ok ? "default" : "destructive"}
+                  variant={
+                    debugInfo.tests.restEndpoint.ok ? "default" : "destructive"
+                  }
                 >
                   {debugInfo.tests.restEndpoint.status}
                 </Badge>
               </div>
               {debugInfo.tests.restEndpoint.hasData && (
                 <div className="p-3 bg-green-50 dark:bg-green-900/20 rounded text-sm">
-                  <strong>✓ REST API works!</strong> Found {debugInfo.tests.restEndpoint.dataCount}{" "}
-                  record(s)
+                  <strong>✓ REST API works!</strong> Found{" "}
+                  {debugInfo.tests.restEndpoint.dataCount} record(s)
                 </div>
               )}
               {debugInfo.tests.restEndpoint.error && (
@@ -185,9 +211,10 @@ export default function DebugPage() {
       </Card>
 
       <div className="mt-4">
-        <Button onClick={() => window.location.reload()}>Refresh Debug Info</Button>
+        <Button onClick={() => window.location.reload()}>
+          Refresh Debug Info
+        </Button>
       </div>
     </div>
   );
 }
-

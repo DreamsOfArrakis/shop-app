@@ -92,10 +92,6 @@ export default async function Home() {
         ) : null}
 
         <CollectionGrid products={data.products?.edges || []} />
-
-        <DifferentFeatureCards />
-
-        <LessIsMoreCard />
       </Shell>
     </main>
   );
@@ -246,12 +242,14 @@ function CollectionGrid({ products }: CollectionGridProps) {
         <div className="flex justify-center items-center absolute w-full h-full top-0 left-0">
           <div className="bg-black/30 backdrop-blur-sm rounded-lg p-8 md:p-10 max-w-2xl text-center">
             <p className="text-5xl mb-3 text-white">The Furniture Store</p>
-            <p className="font-light mb-8 text-white">Designed for real living</p>
+            <p className="font-light mb-8 text-white">
+              Designed for real living
+            </p>
             <Link
               className={cn(
                 buttonVariants({ variant: "outline", size: "lg" }),
                 "text-xl py-8 px-10 border border-white/80 text-white rounded-md",
-                "hover:bg-white hover:text-black transition-colors"
+                "hover:bg-white hover:text-black transition-colors",
               )}
               href={"/shop"}
             >
@@ -269,7 +267,11 @@ function CollectionGrid({ products }: CollectionGridProps) {
               width={800}
               height={900}
               className="object-cover w-full h-full"
-              alt={firstProduct.featuredImage.alt || firstProduct.name || "Featured Product"}
+              alt={
+                firstProduct.featuredImage.alt ||
+                firstProduct.name ||
+                "Featured Product"
+              }
             />
           ) : (
             <div className="w-full h-full bg-muted flex items-center justify-center">
@@ -285,7 +287,11 @@ function CollectionGrid({ products }: CollectionGridProps) {
               width={800}
               height={900}
               className="object-cover w-full h-full"
-              alt={secondProduct.featuredImage.alt || secondProduct.name || "Featured Product"}
+              alt={
+                secondProduct.featuredImage.alt ||
+                secondProduct.name ||
+                "Featured Product"
+              }
             />
           ) : (
             <div className="w-full h-full bg-muted flex items-center justify-center">
