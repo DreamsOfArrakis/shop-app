@@ -1,10 +1,8 @@
 import { Shell } from "@/components/layouts/Shell";
-import {
-  RecommendationProducts,
-  RecommendationProductsSkeleton,
-} from "@/features/products";
+import { WishlistSectionWrapper } from "@/features/wishlists";
 import Link from "next/link";
 import React, { Suspense } from "react";
+import ProductCardSkeleton from "@/features/products/components/ProductCardSkeleton";
 
 type Props = {};
 
@@ -15,13 +13,17 @@ function WishListPage({}: Props) {
         <h1 className="text-3xl">Your Wishlist</h1>
         <Link href="/shop">Continue shopping</Link>
       </section>
-      {/* 
-      <Suspense fallback={<CartSectionSkeleton />}>
-        <CartSection />
-      </Suspense> */}
 
-      <Suspense fallback={<RecommendationProductsSkeleton />}>
-        <RecommendationProducts />
+      <Suspense
+        fallback={
+          <div className="container grid grid-cols-2 lg:grid-cols-4 gap-x-8">
+            {[...Array(4)].map((_, index) => (
+              <ProductCardSkeleton key={index} />
+            ))}
+          </div>
+        }
+      >
+        <WishlistSectionWrapper />
       </Suspense>
     </Shell>
   );

@@ -39,7 +39,9 @@ export function SideMenu() {
           <Branding className="text-xl md:text-4xl md:mb-3" />
 
           <div className="mb-8 text-muted-foreground">
-            <p className="text-xs md:text-sm ml-0 whitespace-pre-line">{siteConfig.address}</p>
+            <p className="text-xs md:text-sm ml-0 whitespace-pre-line">
+              {siteConfig.address}
+            </p>
           </div>
 
           <SocialMedias />

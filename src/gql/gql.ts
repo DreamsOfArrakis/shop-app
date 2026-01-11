@@ -31,6 +31,8 @@ const documents = {
     types.ProductDetailPageQueryDocument,
   "\n  query TestQuery {\n    productsCollection(first: 1) {\n      edges {\n        node {\n          id\n          name\n        }\n      }\n    }\n  }\n":
     types.TestQueryDocument,
+  "\n  query TestCollectionsQuery($collectionSlug: String) {\n    collectionsCollection(\n      filter: { slug: { eq: $collectionSlug } }\n      orderBy: [{ order: DescNullsLast }]\n      first: 1\n    ) {\n      edges {\n        node {\n          id\n          slug\n          label\n          title\n          description\n        }\n      }\n    }\n  }\n":
+    types.TestCollectionsQueryDocument,
   "\n  fragment CartItemCardFragment on products {\n    id\n    slug\n    name\n    price\n    description\n    featuredImage: medias {\n      id\n      key\n      alt\n    }\n  }\n":
     types.CartItemCardFragmentFragmentDoc,
   "\n  query FetchGuestCartQuery(\n    $cartItems: [String!]\n    $first: Int\n    $after: Cursor\n  ) {\n    productsCollection(\n      first: $first\n      after: $after\n      filter: { id: { in: $cartItems } }\n    ) {\n      edges {\n        node {\n          id\n          ...CartItemCardFragment\n        }\n      }\n    }\n  }\n":
@@ -89,6 +91,8 @@ const documents = {
     types.AddProductToWishListDocument,
   "\n  mutation RemoveWishlistItemMutation($productId: String, $userId: UUID) {\n    deleteFromwishlistCollection(\n      filter: {\n        and: [{ user_id: { eq: $userId } }, { product_id: { eq: $productId } }]\n      }\n      atMost: 1\n    ) {\n      records {\n        __typename\n      }\n    }\n  }\n":
     types.RemoveWishlistItemMutationDocument,
+  "\n  query FetchWishlistQuery($userId: UUID) {\n    wishlistCollection(filter: { user_id: { eq: $userId } }) {\n      edges {\n        node {\n          product_id\n          product: products {\n            id\n            name\n            description\n            rating\n            slug\n            badge\n            price\n            featuredImage: medias {\n              id\n              key\n              alt\n            }\n            collections {\n              id\n              label\n              slug\n            }\n          }\n        }\n      }\n    }\n  }\n":
+    types.FetchWishlistQueryDocument,
 };
 
 /**
@@ -159,6 +163,12 @@ export function gql(
 export function gql(
   source: "\n  query TestQuery {\n    productsCollection(first: 1) {\n      edges {\n        node {\n          id\n          name\n        }\n      }\n    }\n  }\n",
 ): (typeof documents)["\n  query TestQuery {\n    productsCollection(first: 1) {\n      edges {\n        node {\n          id\n          name\n        }\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(
+  source: "\n  query TestCollectionsQuery($collectionSlug: String) {\n    collectionsCollection(\n      filter: { slug: { eq: $collectionSlug } }\n      orderBy: [{ order: DescNullsLast }]\n      first: 1\n    ) {\n      edges {\n        node {\n          id\n          slug\n          label\n          title\n          description\n        }\n      }\n    }\n  }\n",
+): (typeof documents)["\n  query TestCollectionsQuery($collectionSlug: String) {\n    collectionsCollection(\n      filter: { slug: { eq: $collectionSlug } }\n      orderBy: [{ order: DescNullsLast }]\n      first: 1\n    ) {\n      edges {\n        node {\n          id\n          slug\n          label\n          title\n          description\n        }\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -333,6 +343,12 @@ export function gql(
 export function gql(
   source: "\n  mutation RemoveWishlistItemMutation($productId: String, $userId: UUID) {\n    deleteFromwishlistCollection(\n      filter: {\n        and: [{ user_id: { eq: $userId } }, { product_id: { eq: $productId } }]\n      }\n      atMost: 1\n    ) {\n      records {\n        __typename\n      }\n    }\n  }\n",
 ): (typeof documents)["\n  mutation RemoveWishlistItemMutation($productId: String, $userId: UUID) {\n    deleteFromwishlistCollection(\n      filter: {\n        and: [{ user_id: { eq: $userId } }, { product_id: { eq: $productId } }]\n      }\n      atMost: 1\n    ) {\n      records {\n        __typename\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(
+  source: "\n  query FetchWishlistQuery($userId: UUID) {\n    wishlistCollection(filter: { user_id: { eq: $userId } }) {\n      edges {\n        node {\n          product_id\n          product: products {\n            id\n            name\n            description\n            rating\n            slug\n            badge\n            price\n            featuredImage: medias {\n              id\n              key\n              alt\n            }\n            collections {\n              id\n              label\n              slug\n            }\n          }\n        }\n      }\n    }\n  }\n",
+): (typeof documents)["\n  query FetchWishlistQuery($userId: UUID) {\n    wishlistCollection(filter: { user_id: { eq: $userId } }) {\n      edges {\n        node {\n          product_id\n          product: products {\n            id\n            name\n            description\n            rating\n            slug\n            badge\n            price\n            featuredImage: medias {\n              id\n              key\n              alt\n            }\n            collections {\n              id\n              label\n              slug\n            }\n          }\n        }\n      }\n    }\n  }\n"];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};

@@ -9,7 +9,8 @@ export const siteConfig = {
   description: "Ecommerce Application built with NextJS 14",
   url: "https://hiyori.hugo-coding.com",
   address: "668 E Harbor Blvd\nVentura, CA 93001",
-  disclaimer: "*This is a test/demo site. No products are available for purchase. This site is for testing and demonstration purposes only. Built with Next.js 14 (React, TypeScript), Tailwind CSS, Supabase (PostgreSQL database, Authentication, Storage), Drizzle ORM, and deployed on Vercel.",
+  disclaimer:
+    "*This is a test/demo site. No products are available for purchase. This site is for testing and demonstration purposes only. Built with Next.js 14 (React, TypeScript), Tailwind CSS, Supabase (PostgreSQL database, Authentication, Storage), Drizzle ORM, and deployed on Vercel.",
   mainNav: [
     {
       title: "Shop",

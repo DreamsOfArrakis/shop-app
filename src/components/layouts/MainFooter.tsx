@@ -49,12 +49,12 @@ function MainFooter({}: Props) {
               <div key={index}>
                 <p className="font-semibold mb-3">{title}</p>
                 <div className="flex flex-col gap-y-2 flex-wrap">
-                  {items?.map((i, index) => 
+                  {items?.map((i, index) =>
                     i.href && !i.disabled ? (
                       <Link href={i.href} key={index} className="text-sm">
                         {i.title}
                       </Link>
-                    ) : null
+                    ) : null,
                   )}
                 </div>
               </div>
