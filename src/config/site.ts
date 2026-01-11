@@ -5,7 +5,7 @@ import { slugify } from "@/lib/utils";
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "HIYORI",
+  name: "THE FURNITURE STORE",
   description: "Ecommerce Application built with NextJS 14",
   url: "https://hiyori.hugo-coding.com",
   address: "1600 Amphitheatre Parkway in Mountain View, California",

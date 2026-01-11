@@ -107,7 +107,7 @@ function HeroSection() {
       <div className="relative w-full h-full md:h-[800px]">
         <Image
           alt="Furniture"
-          src="https://hiyori-backpack.s3.us-west-2.amazonaws.com/public/hero-image.jpg"
+          src={keytoUrl("public/park-city-custom-home-builder-great-room.jpg")}
           width={1920}
           height={1200}
           priority={true}
@@ -116,40 +116,29 @@ function HeroSection() {
       </div>
 
       <div className="container absolute py-8 h-screen md:h-[800px] w-full">
-        <div className="flex flex-col justify-center z-30 h-full">
-          <p className="text-sm md:text-md uppercase tracking-widest text-white ">
-            hugolam
-          </p>
-          <h1 className="text-5xl md:text-9xl font-bold text-white my-4 shadow-md">
-            Utilized with
-            <br />
-            GraphQL:
-          </h1>
+        <div className="flex flex-col justify-center z-30 h-full px-4 md:px-8">
+          <div className="bg-black/30 backdrop-blur-sm rounded-lg p-8 md:p-10 max-w-2xl">
+            <p className="text-xs md:text-sm uppercase tracking-widest text-white/90 mb-3">
+              THE FURNITURE STORE
+            </p>
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-medium text-white mb-6 leading-tight">
+              Quality Furniture
+              <br />
+              For Every Room
+            </h1>
 
-          <div className="flex space-x-4 mt-5 max-w-screen">
-            <Link
-              href="/shop"
-              className={cn(
-                buttonVariants({ variant: "outline", size: "lg" }),
-                "border-2 border-white text-white rounded px-8 py-3 ",
-                "md:px-16 md:py-6",
-                "hover:text-zinc-600 hover:bg-white",
-              )}
-            >
-              New in
-            </Link>
-
-            <Link
-              href="https://github.com/clonglam/HIYORI-master"
-              target="_blank"
-              className={cn(
-                buttonVariants({ variant: "default", size: "lg" }),
-                "border-2 border-primary text-white rounded px-8 py-3 ",
-                "md:px-16 md:py-6",
-              )}
-            >
-              View the Code
-            </Link>
+            <div className="flex space-x-4 mt-6">
+              <Link
+                href="/shop"
+                className={cn(
+                  buttonVariants({ variant: "outline", size: "default" }),
+                  "border border-white/80 text-white rounded-md px-6 py-2.5 text-sm",
+                  "hover:bg-white hover:text-black transition-colors",
+                )}
+              >
+                Shop Now
+              </Link>
+            </div>
           </div>
         </div>
       </div>

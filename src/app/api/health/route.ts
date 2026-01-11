@@ -5,7 +5,7 @@ export async function GET() {
     {
       status: "ok",
       timestamp: new Date().toISOString(),
-      service: "hiyori-app",
+      service: "the-furniture-store-app",
     },
     { status: 200 },
   );

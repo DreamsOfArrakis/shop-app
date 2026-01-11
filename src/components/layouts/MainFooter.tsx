@@ -65,7 +65,7 @@ function MainFooter({}: Props) {
       ],
     },
     {
-      title: "About HIYORI",
+      title: "About THE FURNITURE STORE",
       items: [
         {
           title: "Our Story",
