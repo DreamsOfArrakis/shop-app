@@ -103,7 +103,7 @@ function HeroSection() {
       <div className="relative w-full h-full md:h-[800px]">
         <Image
           alt="Furniture"
-          src={keytoUrl("public/park-city-custom-home-builder-great-room.jpg")}
+          src={keytoUrl("public/Modern_Boho_Living_Room_Ideas_2 copy.png")}
           width={1920}
           height={1200}
           priority={true}
