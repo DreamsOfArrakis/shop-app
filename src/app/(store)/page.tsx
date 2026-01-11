@@ -91,7 +91,7 @@ export default async function Home() {
           <FeaturedProductsCards products={data.products.edges} />
         ) : null}
 
-        <CollectionGrid />
+        <CollectionGrid products={data.products?.edges || []} />
 
         <DifferentFeatureCards />
 
@@ -224,50 +224,74 @@ function FeaturedProductsCards({ products }: FeaturedProductsCardsProps) {
   );
 }
 
-function CollectionGrid() {
-  // Using placeholder images since media bucket is empty
-  // Replace these with actual image keys from Supabase Storage when available
+interface CollectionGridProps {
+  products: { node: DocumentType<typeof ProductCardFragment> }[];
+}
+
+function CollectionGrid({ products }: CollectionGridProps) {
+  // Get first two featured products for the side images
+  const firstProduct = products[0]?.node;
+  const secondProduct = products[1]?.node;
+
   return (
     <section className="relative lg:space-x-5 space-y-5 lg:space-y-0 grid grid-cols-1 lg:grid-cols-3 max-h-[840px]">
       <div className="relative col-span-2 w-full h-[840px]">
         <Image
-          src="https://placehold.co/1080x1080/e5e7eb/9ca3af?text=Bathroom+Collection"
+          src={keytoUrl("public/bathroom-systems-700450.avif")}
           width={1080}
           height={1080}
           className="object-cover w-full h-full"
           alt="Bathroom Collection"
         />
-        <div className="bg-zinc-800/20 flex justify-center items-center flex-col absolute w-full h-full top-0 left-0 text-white">
-          <p className="text-5xl mb-3">Bath Room</p>
-          <p className=" font-light mb-8">Designed for enhanchment</p>
-          <Link
-            className={cn(buttonVariants({ size: "lg" }), "text-xl py-8 px-10")}
-            href={"/collections/bathroom"}
-          >
-            DiscoverNow
-          </Link>
+        <div className="flex justify-center items-center absolute w-full h-full top-0 left-0">
+          <div className="bg-black/30 backdrop-blur-sm rounded-lg p-8 md:p-10 max-w-2xl text-center">
+            <p className="text-5xl mb-3 text-white">The Furniture Store</p>
+            <p className="font-light mb-8 text-white">Designed for real living</p>
+            <Link
+              className={cn(
+                buttonVariants({ variant: "outline", size: "lg" }),
+                "text-xl py-8 px-10 border border-white/80 text-white rounded-md",
+                "hover:bg-white hover:text-black transition-colors"
+              )}
+              href={"/shop"}
+            >
+              Shop Now
+            </Link>
+          </div>
         </div>
       </div>
 
       <div className="flex flex-col w-full space-y-5 h-[840px]">
         <div className="relative w-full h-[340px]">
-          <Image
-            src="https://placehold.co/800x900/e5e7eb/9ca3af?text=Featured+Product"
-            width={800}
-            height={900}
-            className="object-cover w-full h-full"
-            alt="Featured Product"
-          />
+          {firstProduct?.featuredImage?.key ? (
+            <Image
+              src={keytoUrl(firstProduct.featuredImage.key)}
+              width={800}
+              height={900}
+              className="object-cover w-full h-full"
+              alt={firstProduct.featuredImage.alt || firstProduct.name || "Featured Product"}
+            />
+          ) : (
+            <div className="w-full h-full bg-muted flex items-center justify-center">
+              <p className="text-muted-foreground">No image available</p>
+            </div>
+          )}
         </div>
 
         <div className="relative overflow-hidden">
-          <Image
-            src="https://placehold.co/800x900/e5e7eb/9ca3af?text=Featured+Product"
-            width={800}
-            height={900}
-            className="object-cover w-full h-full"
-            alt="Featured Product"
-          />
+          {secondProduct?.featuredImage?.key ? (
+            <Image
+              src={keytoUrl(secondProduct.featuredImage.key)}
+              width={800}
+              height={900}
+              className="object-cover w-full h-full"
+              alt={secondProduct.featuredImage.alt || secondProduct.name || "Featured Product"}
+            />
+          ) : (
+            <div className="w-full h-full bg-muted flex items-center justify-center">
+              <p className="text-muted-foreground">No image available</p>
+            </div>
+          )}
         </div>
       </div>
     </section>

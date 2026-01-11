@@ -230,20 +230,60 @@ async function ProductDetailPage({ params }: Props) {
             <p>{description}</p>
 
             <Accordion type="single" collapsible>
-              <AccordionItem value="item-1">
-                <AccordionTrigger>Is it accessible?</AccordionTrigger>
+              <AccordionItem value="product-details">
+                <AccordionTrigger>Product Details</AccordionTrigger>
                 <AccordionContent>
-                  Yes. It adheres to the WAI-ARIA design pattern.
+                  <div className="space-y-3">
+                    <p>
+                      This piece features a timeless design that seamlessly blends
+                      functionality with modern aesthetics. Crafted with attention to
+                      detail, it&apos;s built to last and designed to enhance any living space.
+                    </p>
+                    <p>
+                      The furniture is constructed from high-quality materials and
+                      finished with a durable protective coating. Each piece is carefully
+                      inspected to ensure it meets our quality standards before shipping.
+                    </p>
+                    <p>
+                      Perfect for modern homes, apartments, and office spaces. The design
+                      complements a variety of interior styles from contemporary to
+                      minimalist.
+                    </p>
+                  </div>
                 </AccordionContent>
               </AccordionItem>
-              <AccordionItem value="item-2">
-                <AccordionTrigger>Is it accessible?</AccordionTrigger>
+              <AccordionItem value="technical-information">
+                <AccordionTrigger>Technical Information</AccordionTrigger>
                 <AccordionContent>
-                  Yes. It adheres to the WAI-ARIA design pattern.
+                  <div className="space-y-3">
+                    <div>
+                      <strong>Dimensions:</strong> Please refer to product specifications
+                      for exact measurements. Standard sizing ensures compatibility with
+                      most room layouts.
+                    </div>
+                    <div>
+                      <strong>Weight Capacity:</strong> Designed to support standard
+                      household use. Maximum weight capacity varies by model.
+                    </div>
+                    <div>
+                      <strong>Assembly:</strong> Some assembly required. All necessary
+                      hardware and detailed instructions included. Estimated assembly time:
+                      30-60 minutes.
+                    </div>
+                    <div>
+                      <strong>Care Instructions:</strong> Clean with a soft, damp cloth.
+                      Avoid harsh chemicals or abrasive cleaners. For wood surfaces, use
+                      furniture polish as needed.
+                    </div>
+                    <div>
+                      <strong>Warranty:</strong> One-year limited warranty covering
+                      manufacturing defects. Warranty details provided with purchase.
+                    </div>
+                  </div>
                 </AccordionContent>
               </AccordionItem>
-              <AccordionItem value="item-3">
-                <AccordionTrigger>Ship & Returns</AccordionTrigger>
+              <AccordionItem value="shipping-returns">
+                <AccordionTrigger>Shipping & Returns</AccordionTrigger>
                 <AccordionContent>
                   Shipping & Returns Spend $80 to receive free shipping for a
                   limited time. Oversized items require additional handling
