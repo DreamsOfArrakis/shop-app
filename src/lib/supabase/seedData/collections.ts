@@ -16,15 +16,17 @@ const collections = [
     label: "Kitchen",
     title: "Elevate Your Kitchen Experience",
     slug: "kitchen-planning",
-    description: "",
+    description:
+      "Transform your kitchen with our premium essentials, blending luxury, functionality, and style. Shop now for the ultimate in comfort and elegance.",
     featuredImageId: "2",
   },
   {
     id: "3",
     label: "Living Room",
-    title: "Elevate Your Kitchen Experience",
+    title: "Elevate Your Living Room Experience",
     slug: "living-room-planning",
-    description: "",
+    description:
+      "Transform your living room with our premium essentials, blending luxury, functionality, and style. Shop now for the ultimate in comfort and elegance.",
     featuredImageId: "3",
     order: 9,
   },
@@ -33,7 +35,8 @@ const collections = [
     label: "Bedroom",
     title: "Elevate Your Bedroom Experience",
     slug: "Bedroom-planning",
-    description: "",
+    description:
+      "Transform your bedroom with our premium essentials, blending luxury, functionality, and style. Shop now for the ultimate in comfort and elegance.",
     featuredImageId: "4",
   },
 ];

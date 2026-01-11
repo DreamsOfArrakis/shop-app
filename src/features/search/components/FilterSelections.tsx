@@ -57,7 +57,7 @@ function FilterSelections({ collectionsSection, shopLayout = true }: Props) {
     const search = searchParams.get("search") ?? undefined;
 
     setQuery({
-      sort: sort ? SortEnum[sort] : undefined,
+      sort: sort ? SortEnum[sort] : SortEnum.BEST_MATCH,
       priceRange:
         range && range.length === 2
           ? [parseInt(range[0]), parseInt(range[1])]
@@ -176,14 +176,14 @@ function FilterSelections({ collectionsSection, shopLayout = true }: Props) {
           </DropdownMenu>
         </div>
 
-        <div className="flex gap-x-5 items-center">
-          <label htmlFor="sort" className="">
+        <div className="flex gap-x-2 items-center">
+          <label htmlFor="sort" className="whitespace-nowrap">
             Sort by:
           </label>
-
           <SortSelection
             id="sort"
             disabled={isLoading}
+            value={Object.keys(SortEnum).find(key => SortEnum[key as keyof typeof SortEnum] === query.sort) || "BEST_MATCH"}
             onValueChange={(sort) => {
               setQuery({ ...query, sort: SortEnum[sort] });
               router.push(`${pathname}?${createQueryString("sort", sort)}`);
@@ -256,11 +256,11 @@ function FilterSelections({ collectionsSection, shopLayout = true }: Props) {
               <SortSelection
                 id="sort"
                 disabled={isLoading}
+                value={Object.keys(SortEnum).find(key => SortEnum[key as keyof typeof SortEnum] === query.sort) || "BEST_MATCH"}
                 onValueChange={(sort) => {
                   setQuery({ ...query, sort: SortEnum[sort] });
                   router.push(`${pathname}?${createQueryString("sort", sort)}`);
                 }}
-                defaultValue={query.sort}
                 items={Object.entries(SortEnum).map(([key, value]) => ({
                   value: key,
                   label: value,

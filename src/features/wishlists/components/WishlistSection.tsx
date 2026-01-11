@@ -86,12 +86,9 @@ const LoadingWishlistSection = () => (
 
 const EmptyWishlistSection = () => (
   <div className="container flex flex-col items-center justify-center py-16">
-    <p className="text-xl text-muted-foreground mb-4">
-      Your wishlist is empty
-    </p>
+    <p className="text-xl text-muted-foreground mb-4">Your wishlist is empty</p>
     <p className="text-sm text-muted-foreground">
       Start adding products you love to your wishlist!
     </p>
   </div>
 );
-

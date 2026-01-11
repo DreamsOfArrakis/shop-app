@@ -21,7 +21,7 @@ async function ProductsPage({}: ProductsPageProps) {
 
   return (
     <Shell>
-      <Header heading="Shop Now" />
+      <Header heading="Shop All Products" />
 
       {/* <Suspense
         fallback={

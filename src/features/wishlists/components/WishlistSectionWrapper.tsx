@@ -24,4 +24,3 @@ function WishlistSectionWrapper() {
 }
 
 export default WishlistSectionWrapper;
-

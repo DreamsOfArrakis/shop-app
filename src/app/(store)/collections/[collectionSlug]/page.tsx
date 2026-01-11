@@ -168,12 +168,19 @@ async function CategoryPage({ params, searchParams }: CategoryPageProps) {
     return notFound();
   }
 
+  // Debug: Log collection data
+  console.log("Collection data:", {
+    slug: collectionSlug,
+    title: collection.title,
+    description: collection.description,
+  });
+
   return (
     <Shell>
       <CollectionBanner collectionBannerData={collection} />
       <SectionHeading
         heading={collection.title}
-        description={collection.description}
+        description={collection.description || undefined}
       />
 
       <Suspense
