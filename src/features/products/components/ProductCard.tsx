@@ -19,6 +19,7 @@ import { BadgeType } from "@/lib/supabase/schema";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Icons } from "@/components/layouts/icons";
+import { formatBadgeLabel } from "@/lib/utils";
 
 type CardProps = React.ComponentProps<typeof Card>;
 
@@ -72,7 +73,7 @@ export function ProductCard({
         </Link>
         {badge && (
           <Badge className="absolute top-0 left-0" variant={badge as BadgeType}>
-            {badge}
+            {formatBadgeLabel(badge)}
           </Badge>
         )}
       </CardContent>

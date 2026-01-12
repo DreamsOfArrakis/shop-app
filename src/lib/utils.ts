@@ -106,3 +106,25 @@ export function getNameInitials(fullName: string): string {
 
   return initials;
 }
+
+export function formatBadgeLabel(badge: string | null | undefined): string {
+  if (!badge) return "";
+  
+  // Map specific badge values to their display labels
+  const badgeLabels: Record<string, string> = {
+    new_product: "New Product",
+    best_sale: "Most Viewed",
+    featured: "Featured",
+  };
+  
+  // Return mapped label if exists, otherwise format normally
+  if (badgeLabels[badge]) {
+    return badgeLabels[badge];
+  }
+  
+  // Fallback: Replace underscores with spaces and capitalize each word
+  return badge
+    .split("_")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(" ");
+}

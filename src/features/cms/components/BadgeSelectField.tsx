@@ -49,8 +49,8 @@ function BadgeSelectField({ name, label }: BadgeSelectFieldProps) {
               <SelectGroup>
                 <SelectLabel>Badge</SelectLabel>
                 <SelectItem value="new_product">New Product</SelectItem>
-                <SelectItem value="best_sale">Best Sale</SelectItem>
-                <SelectItem value="featured">featured</SelectItem>
+                <SelectItem value="best_sale">Most Viewed</SelectItem>
+                <SelectItem value="featured">Featured</SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>
