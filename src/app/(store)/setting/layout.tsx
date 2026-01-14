@@ -14,16 +14,16 @@ const sidebarNavItems = [
     href: "/setting",
   },
   {
-    title: "Account",
-    href: "/setting/account",
+    title: "Notifications",
+    href: "/setting/notifications",
   },
   {
-    title: "Address",
-    href: "/setting/address",
+    title: "Privacy",
+    href: "/setting/privacy",
   },
   {
-    title: "News Letter",
-    href: "/setting/newsletter",
+    title: "Preferences",
+    href: "/setting/preferences",
   },
 ];
 
