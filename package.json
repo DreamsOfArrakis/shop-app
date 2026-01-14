@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "graphql-codegen & next build",
+    "build": "graphql-codegen && next build",
     "start": "node .next/standalone/server.js",
     "lint": "next lint --ignore-path .gitignore .",
     "export": "next build && next export",
@@ -106,7 +106,7 @@
     "zustand": "^4.5.1"
   },
   "engines": {
-    "node": ">=24.0.0",
+    "node": ">=18.0.0",
     "npm": ">=10.0.0"
   },
   "devDependencies": {

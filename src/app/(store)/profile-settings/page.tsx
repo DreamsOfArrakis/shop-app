@@ -66,7 +66,7 @@ export default function ProfilePage() {
       const { error } = await supabaseClient.auth.resetPasswordForEmail(
         user.email,
         {
-          redirectTo: `${window.location.origin}/setting?reset=true`,
+          redirectTo: `${window.location.origin}/profile-settings?reset=true`,
         }
       );
 

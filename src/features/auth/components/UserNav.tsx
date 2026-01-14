@@ -77,7 +77,7 @@ function UserNav() {
               <Link href="/cart">
                 <DropdownMenuItem>Cart</DropdownMenuItem>
               </Link>
-              <Link href="/setting">
+              <Link href="/profile-settings">
                 <DropdownMenuItem>Profile Settings</DropdownMenuItem>
               </Link>
             </DropdownMenuGroup>
