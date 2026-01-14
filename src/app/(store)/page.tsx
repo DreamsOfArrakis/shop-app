@@ -103,7 +103,7 @@ function HeroSection() {
       <div className="relative w-full h-full md:h-[800px]">
         <Image
           alt="Furniture"
-          src={keytoUrl("public/Modern_Boho_Living_Room_Ideas_2 copy.png")}
+          src={keytoUrl("public/kitchen-appliances-ka001.jpeg")}
           width={1920}
           height={1200}
           priority={true}
@@ -233,7 +233,7 @@ function CollectionGrid({ products }: CollectionGridProps) {
     <section className="relative lg:space-x-5 space-y-5 lg:space-y-0 grid grid-cols-1 lg:grid-cols-3 max-h-[840px]">
       <div className="relative col-span-2 w-full h-[840px]">
         <Image
-          src={keytoUrl("public/bathroom-systems-700450.avif")}
+          src={keytoUrl("public/PH205369.avif")}
           width={1080}
           height={1080}
           className="object-cover w-full h-full"
@@ -261,43 +261,23 @@ function CollectionGrid({ products }: CollectionGridProps) {
 
       <div className="flex flex-col w-full space-y-5 h-[840px]">
         <div className="relative w-full h-[340px]">
-          {firstProduct?.featuredImage?.key ? (
-            <Image
-              src={keytoUrl(firstProduct.featuredImage.key)}
-              width={800}
-              height={900}
-              className="object-cover w-full h-full"
-              alt={
-                firstProduct.featuredImage.alt ||
-                firstProduct.name ||
-                "Featured Product"
-              }
-            />
-          ) : (
-            <div className="w-full h-full bg-muted flex items-center justify-center">
-              <p className="text-muted-foreground">No image available</p>
-            </div>
-          )}
+          <Image
+            src={keytoUrl("public/PH199295.avif")}
+            width={800}
+            height={900}
+            className="object-cover w-full h-full"
+            alt="Featured Product"
+          />
         </div>
 
         <div className="relative overflow-hidden">
-          {secondProduct?.featuredImage?.key ? (
-            <Image
-              src={keytoUrl(secondProduct.featuredImage.key)}
-              width={800}
-              height={900}
-              className="object-cover w-full h-full"
-              alt={
-                secondProduct.featuredImage.alt ||
-                secondProduct.name ||
-                "Featured Product"
-              }
-            />
-          ) : (
-            <div className="w-full h-full bg-muted flex items-center justify-center">
-              <p className="text-muted-foreground">No image available</p>
-            </div>
-          )}
+          <Image
+            src={keytoUrl("public/storklinta-nightstand-white-with-2-drawers__1344021_pe949688_s5.avif")}
+            width={800}
+            height={900}
+            className="object-cover w-full h-full"
+            alt="Featured Product"
+          />
         </div>
       </div>
     </section>

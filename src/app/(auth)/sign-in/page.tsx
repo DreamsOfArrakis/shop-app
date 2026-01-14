@@ -10,7 +10,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-import OAuthLoginButtons from "@/features/auth/components/OAuthLoginButtons";
 import { SigninForm } from "@/features/auth";
 import { Suspense } from "react";
 
@@ -35,21 +34,6 @@ export default function SignInPage() {
           >
             <SigninForm />
           </Suspense>
-
-          <div className="relative mb-10">
-            <div className="relative flex justify-center text-xs uppercase">
-              <div className="absolute inset-0 flex items-center z-0">
-                <span className="w-full border-t" />
-              </div>
-              <span className="bg-background px-2 text-muted-foreground z-10">
-                Or continue with
-              </span>
-            </div>
-
-            <div className="w-full py-5">
-              <OAuthLoginButtons />
-            </div>
-          </div>
         </CardContent>
 
         <CardFooter className="flex flex-wrap items-center space-x-2">
