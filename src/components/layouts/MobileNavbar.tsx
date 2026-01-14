@@ -12,7 +12,9 @@ function MobileNavbar({ adminLayout }: Props) {
     <div className="md:hidden flex gap-x-8 justify-between items-center h-[64px]">
       <div className="flex gap-x-3 items-center">
         <SideMenu />
-        <MobileSearchInput />
+        <Suspense fallback={null}>
+          <MobileSearchInput />
+        </Suspense>
       </div>
 
       <Branding />

@@ -7,6 +7,7 @@ import {
 import AdminShell from "@/components/admin/AdminShell";
 import { ProductsDataTable } from "@/features/products";
 import ErrorToaster from "@/components/layouts/ErrorToaster";
+import { Suspense } from "react";
 // TODO: CREATE New Data Table for golbaluse
 
 type AdminUsersPageProps = {
@@ -24,7 +25,9 @@ async function UsersPage({ searchParams }: AdminUsersPageProps) {
     <AdminShell heading="Users" description="Edit/Create new user by admin.">
       <AdminUserNav />
       <ProductsDataTable columns={UsersColumns} data={users || []} />
-      <ErrorToaster />
+      <Suspense fallback={null}>
+        <ErrorToaster />
+      </Suspense>
     </AdminShell>
   );
 }

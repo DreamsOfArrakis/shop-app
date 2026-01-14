@@ -4,6 +4,7 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import CustomProvider from "../providers/CustomProvider";
 import { NavigationLoader } from "@/components/layouts/NavigationLoader";
+import { Suspense } from "react";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -25,7 +26,9 @@ export default function RootLayout({
     <html lang="en">
       <CustomProvider>
         <body className={poppins.className}>
-          <NavigationLoader />
+          <Suspense fallback={null}>
+            <NavigationLoader />
+          </Suspense>
           {children}
           <Toaster />
         </body>
