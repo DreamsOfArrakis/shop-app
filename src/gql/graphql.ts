@@ -2071,6 +2071,21 @@ export type CollectionRouteQueryQuery = {
   } | null;
 };
 
+export type OrderDetailQueryQueryVariables = Exact<{
+  orderId: Scalars["String"];
+}>;
+
+export type OrderDetailQueryQuery = {
+  __typename?: "Query";
+  ordersCollection?: {
+    __typename?: "ordersConnection";
+    edges: Array<{
+      __typename?: "ordersEdge";
+      node: { __typename?: "orders"; id: string; created_at: any };
+    }>;
+  } | null;
+};
+
 export type OrderPageQueryQueryVariables = Exact<{
   first: Scalars["Int"];
   userId?: InputMaybe<Scalars["UUID"]>;
@@ -4405,6 +4420,108 @@ export const CollectionRouteQueryDocument = {
 } as unknown as DocumentNode<
   CollectionRouteQueryQuery,
   CollectionRouteQueryQueryVariables
+>;
+export const OrderDetailQueryDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "OrderDetailQuery" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: {
+            kind: "Variable",
+            name: { kind: "Name", value: "orderId" },
+          },
+          type: {
+            kind: "NonNullType",
+            type: {
+              kind: "NamedType",
+              name: { kind: "Name", value: "String" },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "ordersCollection" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "filter" },
+                value: {
+                  kind: "ObjectValue",
+                  fields: [
+                    {
+                      kind: "ObjectField",
+                      name: { kind: "Name", value: "id" },
+                      value: {
+                        kind: "ObjectValue",
+                        fields: [
+                          {
+                            kind: "ObjectField",
+                            name: { kind: "Name", value: "eq" },
+                            value: {
+                              kind: "Variable",
+                              name: { kind: "Name", value: "orderId" },
+                            },
+                          },
+                        ],
+                      },
+                    },
+                  ],
+                },
+              },
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "first" },
+                value: { kind: "IntValue", value: "1" },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "edges" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "node" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "id" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "created_at" },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  OrderDetailQueryQuery,
+  OrderDetailQueryQueryVariables
 >;
 export const OrderPageQueryDocument = {
   kind: "Document",

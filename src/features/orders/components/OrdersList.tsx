@@ -70,7 +70,7 @@ function OrdersList({ orders }: OrdersListProps) {
 
           <CardContent className="py-3 ">
             <h2 className="text-xl font-semibold col-span-12">
-              Arrive at Tomorrow 22:00{" "}
+              Estimated Delivery: {dayjs(order.created_at).add(2, "weeks").format("MMMM DD, YYYY")}
             </h2>
             <div className="py-3 grid grid-cols-12 gap-8">
               <div className="flex flex-col gap-5 col-span-12 md:col-span-8">
@@ -116,7 +116,7 @@ function OrdersList({ orders }: OrdersListProps) {
                 </Button>
 
                 <Button variant="outline" disabled>
-                  write a product review
+                  Write a product review
                 </Button>
               </section>
             </div>
