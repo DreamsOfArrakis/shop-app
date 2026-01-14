@@ -7,6 +7,10 @@ import { cookies } from "next/headers";
 import { notFound, redirect } from "next/navigation";
 import React from "react";
 
+// Force dynamic rendering to prevent caching
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 const OrderPageQuery = gql(/* GraphQL */ `
   query OrderPageQuery($first: Int!, $userId: UUID) {
     ordersCollection(

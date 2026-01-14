@@ -7,7 +7,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { AddProductToCartForm } from "@/features/carts";
+import { ProductPurchaseActions } from "@/features/products";
 import { ProductCommentsSection } from "@/features/comments";
 import {
   BuyNowButton,
@@ -223,12 +223,10 @@ async function ProductDetailPage({ params }: Props) {
             <AddToWishListButton productId={id} />
           </section>
 
-          <section className="flex mb-8 items-end space-x-5">
+          <section className="mb-8">
             <Suspense>
-              <AddProductToCartForm productId={id} />
+              <ProductPurchaseActions productId={id} />
             </Suspense>
-
-            <BuyNowButton productId={id} />
           </section>
 
           <section>

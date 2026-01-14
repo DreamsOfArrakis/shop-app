@@ -16,6 +16,7 @@ type WishlistStore = {
   wishlist: WishItems;
   toggleWishItem: (productId: string) => void;
   setWishlist: (list: WishItems) => void;
+  removeItems: (productIds: string[]) => void;
 };
 
 const useWishlistStore = create<WishlistStore>(
@@ -40,6 +41,14 @@ const useWishlistStore = create<WishlistStore>(
           }
         }),
       setWishlist: (wishlist) => set(() => ({ wishlist })),
+      removeItems: (productIds) =>
+        set((state) => {
+          const updatedWishlist = { ...state.wishlist };
+          productIds.forEach((productId) => {
+            delete updatedWishlist[productId];
+          });
+          return { wishlist: updatedWishlist };
+        }),
     }),
     { name: "wishlist" },
   ),

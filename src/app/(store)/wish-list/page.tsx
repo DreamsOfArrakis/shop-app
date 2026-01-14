@@ -4,6 +4,10 @@ import Link from "next/link";
 import React, { Suspense } from "react";
 import ProductCardSkeleton from "@/features/products/components/ProductCardSkeleton";
 
+// Force dynamic rendering to prevent caching
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 type Props = {};
 
 function WishListPage({}: Props) {

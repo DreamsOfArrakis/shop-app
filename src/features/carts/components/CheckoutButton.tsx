@@ -1,10 +1,13 @@
 "use client";
 import React, { useState } from "react";
-import { getStripe } from "@/lib/stripe/stripeClient";
 import { cn } from "@/lib/utils";
 import { Spinner } from "@/components/ui/spinner";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/providers/AuthProvider";
+import useCartStore from "../useCartStore";
+import useWishlistStore from "@/features/wishlists/useWishlistStore";
 import type { CartItems } from "@/features/carts";
 
 type CheckoutButtonProps = React.ComponentProps<typeof Button> & {
@@ -14,26 +17,58 @@ type CheckoutButtonProps = React.ComponentProps<typeof Button> & {
 
 function CheckoutButton({ order, guest, ...props }: CheckoutButtonProps) {
   const { toast } = useToast();
+  const router = useRouter();
+  const { user } = useAuth();
+  const removeAllProducts = useCartStore((s) => s.removeAllProducts);
+  const removeWishlistItems = useWishlistStore((s) => s.removeItems);
   const [isLoading, setIsLoading] = useState(false);
 
   const onClickHandler = async () => {
+    // Require authentication for checkout
+    if (!user) {
+      router.push("/sign-in");
+      return;
+    }
+
     setIsLoading(true);
 
-    const res = await fetch("/api/create-checkout-session", {
-      method: "POST",
-      body: JSON.stringify({ orderProducts: order, guest }),
-    });
+    try {
+      const res = await fetch("/api/create-order", {
+        method: "POST",
+        body: JSON.stringify({ orderProducts: order, guest: false }),
+      });
 
-    if (!res.ok) {
+      if (!res.ok) {
+        toast({ title: "An error occurred" });
+        setIsLoading(false);
+        return;
+      }
+
+      const { orderId, purchasedProductIds } = await res.json();
+
+      // Clear guest cart if it exists
+      if (guest) {
+        removeAllProducts();
+      }
+
+      // Remove purchased items from wishlist store
+      if (purchasedProductIds && purchasedProductIds.length > 0) {
+        removeWishlistItems(purchasedProductIds);
+      }
+
+      // Show success toast
+      toast({ title: "Order purchased" });
+
+      // Small delay to ensure database transaction is committed
+      await new Promise((resolve) => setTimeout(resolve, 500));
+
+      // Redirect to orders page with cache busting
+      router.push(`/orders?t=${Date.now()}`);
+      router.refresh();
+    } catch (err) {
       toast({ title: "An error occurred" });
       setIsLoading(false);
     }
-
-    const { sessionId } = await res.json();
-
-    setIsLoading(false);
-    const stripe = await getStripe();
-    stripe?.redirectToCheckout({ sessionId });
   };
   return (
     <Button
