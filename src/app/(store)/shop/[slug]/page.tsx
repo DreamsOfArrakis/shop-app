@@ -21,9 +21,9 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 type Props = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 export const metadata: Metadata = {
   title: `THE FURNITURE STORE | Ecommerce Platforum Built with Nextjs 14.`,
@@ -70,6 +70,7 @@ const ProductDetailPageQuery = gql(/* GraphQL */ `
 `);
 
 async function ProductDetailPage({ params }: Props) {
+  const { slug } = await params;
   // Use direct fetch since URQL has issues with fragments
   const { env } = await import("@/env.mjs");
   const graphqlUrl = `https://${env.NEXT_PUBLIC_SUPABASE_PROJECT_REF}.supabase.co/graphql/v1`;
@@ -170,7 +171,7 @@ async function ProductDetailPage({ params }: Props) {
     },
     body: JSON.stringify({
       query,
-      variables: { productSlug: params.slug },
+      variables: { productSlug: slug },
     }),
   });
 
@@ -178,7 +179,7 @@ async function ProductDetailPage({ params }: Props) {
 
   if (json.errors) {
     console.error("❌ GraphQL Errors:", json.errors);
-    console.error("❌ Query variables:", { productSlug: params.slug });
+    console.error("❌ Query variables:", { productSlug: slug });
     return notFound();
   }
 
@@ -188,7 +189,7 @@ async function ProductDetailPage({ params }: Props) {
     hasData: !!data,
     hasProductsCollection: !!data?.productsCollection,
     edgesLength: data?.productsCollection?.edges?.length,
-    slug: params.slug,
+    slug: slug,
   });
 
   if (
@@ -197,7 +198,7 @@ async function ProductDetailPage({ params }: Props) {
     !data.productsCollection.edges ||
     data.productsCollection.edges.length === 0
   ) {
-    console.error("❌ Product not found:", params.slug);
+    console.error("❌ Product not found:", slug);
     console.error("❌ GraphQL Response:", JSON.stringify(data, null, 2));
     return notFound();
   }

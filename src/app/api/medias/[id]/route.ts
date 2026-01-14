@@ -7,10 +7,11 @@ import { keytoUrl } from "@/lib/utils";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
+  const { id } = await params;
   const media = await db.query.medias.findFirst({
-    where: eq(medias.id, params.id),
+    where: eq(medias.id, id),
   });
 
   if (!media)

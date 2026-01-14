@@ -14,18 +14,19 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
 interface CategoryPageProps {
-  params: {
+  params: Promise<{
     collectionSlug: string;
-  };
-  searchParams: {
+  }>;
+  searchParams: Promise<{
     [key: string]: string | string[] | undefined;
-  };
+  }>;
 }
 
-export function generateMetadata({ params }: CategoryPageProps) {
+export async function generateMetadata({ params }: CategoryPageProps) {
+  const { collectionSlug } = await params;
   return {
-    title: `THE FURNITURE STORE | ${toTitleCase(unslugify(params.collectionSlug))}`,
-    description: `THE FURNITURE STORE | Buy ${params.collectionSlug} funiture.`,
+    title: `THE FURNITURE STORE | ${toTitleCase(unslugify(collectionSlug))}`,
+    description: `THE FURNITURE STORE | Buy ${collectionSlug} funiture.`,
   };
 }
 
@@ -60,7 +61,8 @@ const CollectionRouteQuery = gql(/* GraphQL */ `
 `);
 
 async function CategoryPage({ params, searchParams }: CategoryPageProps) {
-  const { collectionSlug } = params;
+  const { collectionSlug } = await params;
+  const resolvedSearchParams = await searchParams;
 
   // Use direct fetch since URQL has issues with fragments
   const { env } = await import("@/env.mjs");

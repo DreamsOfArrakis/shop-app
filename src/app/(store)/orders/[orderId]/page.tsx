@@ -10,7 +10,7 @@ import { redirect, notFound } from "next/navigation";
 import dayjs from "dayjs";
 
 type TrackOrderProps = {
-  params: { orderId: string };
+  params: Promise<{ orderId: string }>;
 };
 
 const OrderDetailQuery = gql(/* GraphQL */ `
@@ -26,7 +26,8 @@ const OrderDetailQuery = gql(/* GraphQL */ `
   }
 `);
 
-async function TrackOrderPage({ params: { orderId } }: TrackOrderProps) {
+async function TrackOrderPage({ params }: TrackOrderProps) {
+  const { orderId } = await params;
   const cookieStore = cookies();
   const supabase = createClient({ cookieStore });
 
@@ -39,7 +40,7 @@ async function TrackOrderPage({ params: { orderId } }: TrackOrderProps) {
   }
 
   const { data, error } = await getClient().query(OrderDetailQuery, {
-    orderId: params.orderId,
+    orderId: orderId,
   });
 
   if (!data || !data.ordersCollection?.edges?.[0]) {
