@@ -50,19 +50,19 @@ function GuestCartSection() {
     if (quantity < 8) {
       addProductToCart(productId, 1);
     } else {
-      toast({ title: "Proudct Limit is reached." });
+      toast({ title: "Maximum quantity reached" });
     }
   };
   const minusOneHandler = (productId: string, quantity: number) => {
     if (quantity > 1) {
       addProductToCart(productId, -1);
     } else {
-      toast({ title: "Minimum is reached." });
+      toast({ title: "Minimum quantity reached" });
     }
   };
   const removeHandler = (productId: string) => {
     removeProduct(productId);
-    toast({ title: "Product Removed." });
+    toast({ title: "Product removed from cart" });
   };
 
   return (

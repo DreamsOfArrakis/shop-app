@@ -92,7 +92,7 @@ function UserCartSection({ user }: UserCartSectionProps) {
 
       setIsLoading(false);
     } else {
-      toast({ title: "Proudct Limit is reached." });
+      toast({ title: "Maximum quantity reached" });
     }
   };
 
@@ -114,7 +114,7 @@ function UserCartSection({ user }: UserCartSectionProps) {
 
       setIsLoading(false);
     } else {
-      toast({ title: "Minimum is reached." });
+      toast({ title: "Minimum quantity reached" });
     }
   };
 
@@ -124,7 +124,7 @@ function UserCartSection({ user }: UserCartSectionProps) {
     const res = await removeCart({ productId, userId: user.id });
     reexecuteQuery({ requestPolicy: "network-only" });
 
-    toast({ title: "Removed a Product." });
+    toast({ title: "Product removed from cart" });
 
     if (res.error) {
       toast({

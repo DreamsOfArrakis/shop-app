@@ -58,10 +58,10 @@ function AddToWishListButton({ productId }: Props) {
     } else {
       if (wishlist[productId]) {
         const res = await removeWishlistItem({ productId, userId: user.id });
-        if (res.data) toast({ title: "Removed from wishlist." });
+        if (res.data) toast({ title: "Removed from wishlist" });
       } else {
         const res = await addToWishlist({ productId, userId: user.id });
-        if (res.data) toast({ title: "Product added to Wishlist" });
+        if (res.data) toast({ title: "Added to wishlist" });
       }
 
       toggleWishlist(productId);

@@ -55,7 +55,7 @@ export function SignInForm() {
       if (error) {
         toast({ title: "Error", description: error.message });
       } else {
-        toast({ title: "Login Sucess" });
+        toast({ title: "Login successful" });
         router.push(searchParams?.get("from") || "/");
       }
     });

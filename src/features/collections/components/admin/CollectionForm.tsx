@@ -80,7 +80,7 @@ function CollectionForm({ collection }: CollectionFormProps) {
         if (res.data) {
           router.push("/admin/collections");
           router.refresh();
-          toast({ title: "Success Collection is updated." });
+          toast({ title: "Collection updated successfully" });
         }
       } else {
         const res = await createCollection({ id: nanoid(), ...data });
@@ -89,7 +89,7 @@ function CollectionForm({ collection }: CollectionFormProps) {
           router.push("/admin/collections");
           router.refresh();
 
-          toast({ title: "Success Collection is created." });
+          toast({ title: "Collection created successfully" });
         }
       }
     } catch {

@@ -59,7 +59,7 @@ function UpdateMediaForm({ media }: UpdateMediaFormProps) {
     console.log("Delete");
     router.push("/admin/medias");
     router.refresh();
-    toast({ title: "Image Deleted" });
+    toast({ title: "Image deleted successfully" });
   };
 
   const onSubmit = handleSubmit(async (data: InsertMedia) => {

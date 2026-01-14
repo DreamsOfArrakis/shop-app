@@ -25,7 +25,7 @@ function CheckoutButton({ order, guest, ...props }: CheckoutButtonProps) {
     });
 
     if (!res.ok) {
-      toast({ title: "Somme Error occured" });
+      toast({ title: "An error occurred" });
       setIsLoading(false);
     }
 

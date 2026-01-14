@@ -87,7 +87,7 @@ function ProductFrom({ product }: ProductsFormProps) {
         router.refresh();
 
         toast({
-          title: `Product is ${product ? "updated" : "created"}.`,
+          title: `Product ${product ? "updated" : "created"} successfully`,
           description: `${data.name}`,
         });
       } catch (err) {

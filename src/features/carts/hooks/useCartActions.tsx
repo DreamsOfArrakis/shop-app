@@ -39,15 +39,15 @@ function useCartActions(user: User | null, productId: string) {
           newQuantity: existedProduct.node.quantity + quantity,
         });
       }
-      if (res) toast({ title: "Success, Added a Product to the Cart." });
+      if (res) toast({ title: "Product added to cart" });
     } catch (err) {
-      toast({ title: "Error, Unexpected Error occurred." });
+      toast({ title: "An error occurred" });
     }
   };
 
   const guestAddProduct = (quantity: number) => {
     addProductStorage(productId, quantity);
-    toast({ title: "Sucess, Added a Product to the Cart." });
+    toast({ title: "Product added to cart" });
   };
 
   const addProductToCart = (quantity: number) =>
