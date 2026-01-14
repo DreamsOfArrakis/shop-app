@@ -1,7 +1,6 @@
 import { SettingSidebarNav } from "@/components/layouts/SettingSidebar";
 import { Separator } from "@/components/ui/separator";
 import { Metadata } from "next";
-import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Forms",
