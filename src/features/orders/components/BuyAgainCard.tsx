@@ -30,35 +30,38 @@ export const BuyAgainCardFragment = gql(/* GraphQL */ `
 function BuyAgainCard({ products }: BuyAgainCardProps) {
   return (
     <Card>
-      <CardHeader className="px-6 py-3 flex flex-row justify-between items-center bg-zinc-100">
-        <h2 className="text-lg">Buy again</h2>
+      <CardHeader className="px-6 py-4 border-b bg-muted/50">
+        <h2 className="text-lg font-semibold">Buy again</h2>
       </CardHeader>
-      <CardContent className="flex flex-col gap-y-5 py-5">
-        {products.map(({ node }) => (
-          <div key={node.id} className="grid grid-cols-5">
-            <div className="relative col-span-2">
-              <Image
-                src={keytoUrl(node.featuredImage.key)}
-                alt={node.featuredImage.alt}
-                className="w-[80px] h-[80px] object-cover"
-                width={80}
-                height={80}
-              />
-            </div>
+      <CardContent className="p-6">
+        <div className="flex flex-col gap-6">
+          {products.map(({ node }) => (
+            <Link
+              key={node.id}
+              href={`/shop/${node.slug}`}
+              className="flex gap-4 group hover:opacity-80 transition-opacity"
+            >
+              <div className="relative flex-shrink-0">
+                <Image
+                  src={keytoUrl(node.featuredImage.key)}
+                  alt={node.featuredImage.alt}
+                  className="w-20 h-20 rounded-md object-cover"
+                  width={80}
+                  height={80}
+                />
+              </div>
 
-            <div className="col-span-3 ">
-              <Link
-                href={"/shop/" + node.slug}
-                className="text-blue-500 line-clamp-3"
-              >
-                {node.name}
-              </Link>
-              <Link href={node.slug} className="text-red-700">
-                <p>${node.price}</p>
-              </Link>
-            </div>
-          </div>
-        ))}
+              <div className="flex-1 min-w-0 flex flex-col justify-center gap-1">
+                <h3 className="text-sm font-medium line-clamp-2 text-foreground group-hover:underline">
+                  {node.name}
+                </h3>
+                <p className="text-base font-semibold text-foreground">
+                  ${node.price}
+                </p>
+              </div>
+            </Link>
+          ))}
+        </div>
       </CardContent>
     </Card>
   );
