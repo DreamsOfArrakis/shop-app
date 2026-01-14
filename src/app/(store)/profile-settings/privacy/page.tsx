@@ -21,7 +21,6 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import supabaseClient from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 
 export default function PrivacyPage() {
@@ -30,9 +29,14 @@ export default function PrivacyPage() {
 
   const handleDeleteAccount = async () => {
     try {
-      const { error } = await supabaseClient.auth.deleteUser();
+      const response = await fetch("/api/delete-account", {
+        method: "DELETE",
+      });
 
-      if (error) throw error;
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || "Failed to delete account");
+      }
 
       toast({
         title: "Account deleted",
