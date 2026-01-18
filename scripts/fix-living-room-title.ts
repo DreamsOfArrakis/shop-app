@@ -42,4 +42,3 @@ async function fixLivingRoomTitle() {
 }
 
 fixLivingRoomTitle();
-

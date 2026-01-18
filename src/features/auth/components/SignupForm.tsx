@@ -41,7 +41,8 @@ export function SignUpForm() {
   const { toast } = useToast();
   const supabase = createClient();
   const [isLoading, setIsLoading] = React.useState(false);
-  const [showVerificationDialog, setShowVerificationDialog] = React.useState(false);
+  const [showVerificationDialog, setShowVerificationDialog] =
+    React.useState(false);
   const [userEmail, setUserEmail] = React.useState<string>("");
 
   const form = useForm<FormData>({
@@ -104,7 +105,9 @@ export function SignUpForm() {
     setShowVerificationDialog(false);
     // Navigate to sign-in page after closing dialog
     const from = searchParams?.get("from");
-    router.push(from ? `/sign-in?from=${encodeURIComponent(from)}` : "/sign-in");
+    router.push(
+      from ? `/sign-in?from=${encodeURIComponent(from)}` : "/sign-in",
+    );
   }
 
   return (
@@ -167,7 +170,10 @@ export function SignUpForm() {
         </form>
       </Form>
 
-      <Dialog open={showVerificationDialog} onOpenChange={setShowVerificationDialog}>
+      <Dialog
+        open={showVerificationDialog}
+        onOpenChange={setShowVerificationDialog}
+      >
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
             <div className="flex justify-center mb-4">
@@ -185,13 +191,15 @@ export function SignUpForm() {
           </DialogHeader>
           <div className="py-4 space-y-3 text-sm text-muted-foreground">
             <p>
-              Please check your email and click the verification link to activate your account.
+              Please check your email and click the verification link to
+              activate your account.
             </p>
             <p>
               Once verified, you&apos;ll be able to sign in and start shopping.
             </p>
             <p className="text-xs pt-2">
-              Didn&apos;t receive the email? Check your spam folder or contact support if the issue persists.
+              Didn&apos;t receive the email? Check your spam folder or contact
+              support if the issue persists.
             </p>
           </div>
           <DialogFooter>

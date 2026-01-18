@@ -48,7 +48,9 @@ async function TrackOrderPage({ params }: TrackOrderProps) {
   }
 
   const order = data.ordersCollection.edges[0].node;
-  const estimatedDeliveryDate = dayjs(order.created_at).add(2, "weeks").format("MMMM DD, YYYY");
+  const estimatedDeliveryDate = dayjs(order.created_at)
+    .add(2, "weeks")
+    .format("MMMM DD, YYYY");
 
   return (
     <Shell layout="narrow">

@@ -272,7 +272,9 @@ function CollectionGrid({ products }: CollectionGridProps) {
 
         <div className="relative overflow-hidden">
           <Image
-            src={keytoUrl("public/storklinta-nightstand-white-with-2-drawers__1344021_pe949688_s5.avif")}
+            src={keytoUrl(
+              "public/storklinta-nightstand-white-with-2-drawers__1344021_pe949688_s5.avif",
+            )}
             width={800}
             height={900}
             className="object-cover w-full h-full"

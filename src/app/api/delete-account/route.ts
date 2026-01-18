@@ -12,10 +12,7 @@ export async function DELETE() {
     } = await supabase.auth.getUser();
 
     if (authError || !user) {
-      return NextResponse.json(
-        { error: "Unauthorized" },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     // Delete user using admin client (requires service role)
@@ -31,7 +28,7 @@ export async function DELETE() {
           autoRefreshToken: false,
           persistSession: false,
         },
-      }
+      },
     );
 
     const { error } = await adminClient.auth.admin.deleteUser(user.id);
@@ -40,7 +37,7 @@ export async function DELETE() {
       console.error("Error deleting user:", error);
       return NextResponse.json(
         { error: error.message || "Failed to delete account" },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
@@ -49,8 +46,7 @@ export async function DELETE() {
     console.error("Error in delete account:", error);
     return NextResponse.json(
       { error: error.message || "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
-

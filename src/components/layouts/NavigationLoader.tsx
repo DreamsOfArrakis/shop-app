@@ -16,7 +16,7 @@ export function NavigationLoader() {
     const handleLinkClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       const link = target.closest("a");
-      
+
       // Check if it's an internal Next.js link
       if (
         link &&
@@ -27,7 +27,7 @@ export function NavigationLoader() {
       ) {
         const href = link.getAttribute("href");
         const currentPath = pathname + searchParams.toString();
-        
+
         if (href && href !== currentPath && !isLoading) {
           setIsLoading(true);
         }
@@ -78,7 +78,7 @@ export function NavigationLoader() {
       className={cn(
         "fixed inset-0 z-[9999] flex items-center justify-center",
         "bg-background/80 backdrop-blur-sm transition-opacity duration-200",
-        isLoading ? "opacity-100" : "opacity-0 pointer-events-none"
+        isLoading ? "opacity-100" : "opacity-0 pointer-events-none",
       )}
       aria-label="Loading page"
       role="status"

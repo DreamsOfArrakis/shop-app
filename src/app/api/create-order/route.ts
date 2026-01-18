@@ -88,8 +88,8 @@ export async function POST(request: Request) {
             .where(
               and(
                 eq(wishlist.userId, userId),
-                inArray(wishlist.productId, purchasedProductIds)
-              )
+                inArray(wishlist.productId, purchasedProductIds),
+              ),
             )
             .returning();
           console.log(

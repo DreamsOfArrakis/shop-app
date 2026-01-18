@@ -13,7 +13,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useAuth } from "@/providers/AuthProvider";
 import useCartActions from "@/features/carts/hooks/useCartActions";
-import { AddProductCartData, AddProductToCartSchema } from "@/features/carts/validations";
+import {
+  AddProductCartData,
+  AddProductToCartSchema,
+} from "@/features/carts/validations";
 import BuyNowButton from "./BuyNowButton";
 import { useState } from "react";
 

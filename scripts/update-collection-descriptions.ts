@@ -16,10 +16,14 @@ import * as schema from "../src/lib/supabase/schema";
 import { eq } from "drizzle-orm";
 
 const collectionDescriptions = {
-  bathroom: "Transform your bathroom with our premium essentials, blending luxury, functionality, and style. Shop now for the ultimate in comfort and elegance.",
-  "kitchen-planning": "Transform your kitchen with our premium essentials, blending luxury, functionality, and style. Shop now for the ultimate in comfort and elegance.",
-  "living-room-planning": "Transform your living room with our premium essentials, blending luxury, functionality, and style. Shop now for the ultimate in comfort and elegance.",
-  "Bedroom-planning": "Transform your bedroom with our premium essentials, blending luxury, functionality, and style. Shop now for the ultimate in comfort and elegance.",
+  bathroom:
+    "Transform your bathroom with our premium essentials, blending luxury, functionality, and style. Shop now for the ultimate in comfort and elegance.",
+  "kitchen-planning":
+    "Transform your kitchen with our premium essentials, blending luxury, functionality, and style. Shop now for the ultimate in comfort and elegance.",
+  "living-room-planning":
+    "Transform your living room with our premium essentials, blending luxury, functionality, and style. Shop now for the ultimate in comfort and elegance.",
+  "Bedroom-planning":
+    "Transform your bedroom with our premium essentials, blending luxury, functionality, and style. Shop now for the ultimate in comfort and elegance.",
 };
 
 async function updateCollectionDescriptions() {
@@ -47,4 +51,3 @@ async function updateCollectionDescriptions() {
 }
 
 updateCollectionDescriptions();
-

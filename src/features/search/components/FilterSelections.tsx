@@ -183,7 +183,11 @@ function FilterSelections({ collectionsSection, shopLayout = true }: Props) {
           <SortSelection
             id="sort"
             disabled={isLoading}
-            value={Object.keys(SortEnum).find(key => SortEnum[key as keyof typeof SortEnum] === query.sort) || "BEST_MATCH"}
+            value={
+              Object.keys(SortEnum).find(
+                (key) => SortEnum[key as keyof typeof SortEnum] === query.sort,
+              ) || "BEST_MATCH"
+            }
             onValueChange={(sort) => {
               setQuery({ ...query, sort: SortEnum[sort] });
               router.push(`${pathname}?${createQueryString("sort", sort)}`);
@@ -256,7 +260,12 @@ function FilterSelections({ collectionsSection, shopLayout = true }: Props) {
               <SortSelection
                 id="sort"
                 disabled={isLoading}
-                value={Object.keys(SortEnum).find(key => SortEnum[key as keyof typeof SortEnum] === query.sort) || "BEST_MATCH"}
+                value={
+                  Object.keys(SortEnum).find(
+                    (key) =>
+                      SortEnum[key as keyof typeof SortEnum] === query.sort,
+                  ) || "BEST_MATCH"
+                }
                 onValueChange={(sort) => {
                   setQuery({ ...query, sort: SortEnum[sort] });
                   router.push(`${pathname}?${createQueryString("sort", sort)}`);

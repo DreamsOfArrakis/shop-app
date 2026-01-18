@@ -118,16 +118,22 @@ export default function PrivacyPage() {
               </AlertDialogTrigger>
               <AlertDialogContent>
                 <AlertDialogHeader>
-                  <AlertDialogTitle>Are you sure you want to delete your account?</AlertDialogTitle>
+                  <AlertDialogTitle>
+                    Are you sure you want to delete your account?
+                  </AlertDialogTitle>
                   <AlertDialogDescription>
-                    This action cannot be undone. Deleting your account will permanently remove:
+                    This action cannot be undone. Deleting your account will
+                    permanently remove:
                     <ul className="list-disc list-inside mt-2 space-y-1">
                       <li>Your profile and account information</li>
                       <li>Your order history</li>
                       <li>Your wishlist and saved items</li>
                       <li>All associated data</li>
                     </ul>
-                    <p className="mt-2">If you&apos;re sure you want to proceed, click &quot;Delete Account&quot; below.</p>
+                    <p className="mt-2">
+                      If you&apos;re sure you want to proceed, click
+                      &quot;Delete Account&quot; below.
+                    </p>
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
@@ -147,4 +153,3 @@ export default function PrivacyPage() {
     </div>
   );
 }
-

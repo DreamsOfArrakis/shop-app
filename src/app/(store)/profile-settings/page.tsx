@@ -22,9 +22,7 @@ export default function ProfilePage() {
   const { toast } = useToast();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const [name, setName] = useState(
-    (user?.user_metadata?.name as string) || ""
-  );
+  const [name, setName] = useState((user?.user_metadata?.name as string) || "");
   const [email] = useState(user?.email || "");
 
   const handleUpdateProfile = async (e: React.FormEvent) => {
@@ -67,7 +65,7 @@ export default function ProfilePage() {
         user.email,
         {
           redirectTo: `${window.location.origin}/profile-settings?reset=true`,
-        }
+        },
       );
 
       if (error) throw error;
@@ -89,7 +87,9 @@ export default function ProfilePage() {
   if (!user) {
     return (
       <div className="flex items-center justify-center min-h-[30vh]">
-        <p className="text-muted-foreground">Please sign in to view your profile.</p>
+        <p className="text-muted-foreground">
+          Please sign in to view your profile.
+        </p>
       </div>
     );
   }
@@ -106,9 +106,7 @@ export default function ProfilePage() {
       <Card>
         <CardHeader>
           <CardTitle>Personal Information</CardTitle>
-          <CardDescription>
-            Update your name and email address.
-          </CardDescription>
+          <CardDescription>Update your name and email address.</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleUpdateProfile} className="space-y-4">
@@ -133,7 +131,8 @@ export default function ProfilePage() {
                 className="bg-muted cursor-not-allowed"
               />
               <p className="text-xs text-muted-foreground">
-                Email cannot be changed. Contact support if you need to update your email.
+                Email cannot be changed. Contact support if you need to update
+                your email.
               </p>
             </div>
 
