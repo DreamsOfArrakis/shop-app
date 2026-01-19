@@ -11,6 +11,8 @@
     "serve:out": "serve out",
     "serve": "npm run build && npm run start",
     "test": "jest",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
     "format": "prettier --ignore-path .gitignore --write \"**/*.{ts,tsx,css,scss}\"",
     "coverage": "npm test --coverage --watchAll --collectCoverageFrom='src/components'",
     "db:generate": "drizzle-kit generate:pg --config=drizzle.config.ts",
