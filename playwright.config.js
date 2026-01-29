@@ -1,7 +1,7 @@
 const { defineConfig, devices } = require('@playwright/test');
 
 module.exports = defineConfig({
-  testDir: './tests/e2e',
+  testDir: './tests',
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
@@ -17,8 +17,18 @@ module.exports = defineConfig({
   },
   projects: [
     {
-      name: 'chromium',
+      name: 'e2e',
+      testDir: './tests/e2e',
+      testMatch: /.*\.spec\.js$/,
       use: { ...devices['Desktop Chrome'] },
+    },
+    {
+      name: 'api',
+      testDir: './tests/api',
+      testMatch: /.*\.spec\.js$/,
+      use: {
+        baseURL: process.env.API_BASE_URL || 'https://shop-app-hazel-one.vercel.app',
+      },
     },
   ],
 });
